@@ -8,28 +8,28 @@ const About: React.FC = () => {
   const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
 
   const companies = [
-    {
-      id: 'baksh-group',
-      name: "Baksh Group",
-      shortDescription: "The parent company providing strategic direction and investment across all group businesses.",
-      description: "Baksh Group is a diversified conglomerate with a strong presence in the maritime, logistics, and investment sectors. As the parent company, we provide strategic direction, financial strength, and operational support to all our subsidiaries.",
-      icon: <Building2 className="w-8 h-8 text-blue-600" />,
-      link: "/baksh-group",
-      year: 2005,
-      employees: "1000+",
-      locations: ["Karachi", "Lahore", "Islamabad", "Dubai"],
-      values: [
-        { icon: <Target className="w-5 h-5" />, title: "Innovation", description: "Pioneering new solutions" },
-        { icon: <Shield className="w-5 h-5" />, title: "Integrity", description: "Ethical business practices" },
-        { icon: <BarChart2 className="w-5 h-5" />, title: "Growth", description: "Sustainable expansion" }
-      ],
-      stats: [
-        { value: "18+", label: "Years Experience" },
-        { value: "5+", label: "Countries" },
-        { value: "50+", label: "Vessels" },
-        { value: "1M+", label: "TEUs Handled" }
-      ]
-    },
+    // {
+    //   id: 'baksh-group',
+    //   name: "Baksh Group",
+    //   shortDescription: "The parent company providing strategic direction and investment across all group businesses.",
+    //   description: "Baksh Group is a diversified conglomerate with a strong presence in the maritime, logistics, and investment sectors. As the parent company, we provide strategic direction, financial strength, and operational support to all our subsidiaries.",
+    //   icon: <Building2 className="w-8 h-8 text-blue-600" />,
+    //   link: "/baksh-group",
+    //   year: 2005,
+    //   employees: "1000+",
+    //   locations: ["Karachi", "Lahore", "Islamabad", "Dubai"],
+    //   values: [
+    //     { icon: <Target className="w-5 h-5" />, title: "Innovation", description: "Pioneering new solutions" },
+    //     { icon: <Shield className="w-5 h-5" />, title: "Integrity", description: "Ethical business practices" },
+    //     { icon: <BarChart2 className="w-5 h-5" />, title: "Growth", description: "Sustainable expansion" }
+    //   ],
+    //   stats: [
+    //     { value: "18+", label: "Years Experience" },
+    //     { value: "5+", label: "Countries" },
+    //     { value: "50+", label: "Vessels" },
+    //     { value: "1M+", label: "TEUs Handled" }
+    //   ]
+    // },
     {
       id: 'baksh-investment',
       name: "Baksh Investment Limited",
@@ -111,12 +111,12 @@ const About: React.FC = () => {
         { icon: <Users className="w-5 h-5" />, title: "Partnership", description: "Collaborative approach" },
         { icon: <BarChart2 className="w-5 h-5" />, title: "Efficiency", description: "Streamlined operations" }
       ],
-      stats: [
-        { value: "1M+", label: "Shipments/Year" },
-        { value: "100+", label: "Vehicles" },
-        { value: "50K+", label: "Sq. Ft. Warehouse" },
-        { value: "99.9%", label: "Accuracy" }
-      ]
+      // stats: [
+      //   { value: "1M+", label: "Shipments/Year" },
+      //   { value: "100+", label: "Vehicles" },
+      //   { value: "50K+", label: "Sq. Ft. Warehouse" },
+      //   { value: "99.9%", label: "Accuracy" }
+      // ]
     }
   ];
 
@@ -128,26 +128,60 @@ const About: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div 
-        className="relative h-96 flex items-center justify-center bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${pageBackgrounds.about})` }}
+        className="relative min-h-[24rem] flex items-start justify-center bg-white py-12 shadow-md"
       >
-        <div className="text-center px-4">
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            About Our <span className="text-blue-400">Group</span>
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-gray-200 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            A diversified group of companies specializing in maritime services, logistics, and strategic investments.
-          </motion.p>
+        <div className="container mx-auto px-4 pt-4">
+          <div className="max-w-5xl mx-auto text-center">
+            
+            <motion.h1 
+              className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-800 leading-tight pt-2"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{
+                fontFamily: "'Playfair Display', serif"
+              }}
+            >
+              Pioneering <span className="text-blue-500">Maritime</span>
+              <br />
+              <span className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-700">Excellence Since 1951</span>
+            </motion.h1>
+            
+            <motion.div 
+              className="w-16 h-1 bg-blue-500 mx-auto my-6"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            />
+            
+            <motion.p 
+              className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 300
+              }}
+            >
+              A diversified conglomerate at the forefront of maritime innovation, logistics solutions, and strategic investments, connecting markets with integrity and vision.
+            </motion.p>
+            
+            <motion.div
+              className="flex flex-wrap justify-center gap-4 mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              <a 
+                href="/contact" 
+                className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-all duration-300 flex items-center gap-2 group shadow-lg"
+              >
+                Get in Touch
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -166,7 +200,7 @@ const About: React.FC = () => {
                       : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                   }`}
                 >
-                  {tab === 'overview' ? 'Group Overview' : companies.find(c => c.id === tab)?.name}
+                  {tab === 'overview' ? 'Baksh Group' : companies.find(c => c.id === tab)?.name}
                 </button>
               ))}
             </div>
@@ -198,27 +232,27 @@ const About: React.FC = () => {
                     professionals committed to excellence.
                   </p>
                   <div className="grid grid-cols-2 gap-4 mt-8">
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <div className="text-3xl font-bold text-blue-600">18+</div>
-                      <div className="text-sm text-gray-600">Years Experience</div>
+                    <div className="bg-gray-800 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-white">74+</div>
+                      <div className="text-sm text-gray-300">Years Experience</div>
                     </div>
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <div className="text-3xl font-bold text-blue-600">5+</div>
-                      <div className="text-sm text-gray-600">Countries</div>
+                    <div className="bg-gray-800 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-white">Multiple</div>
+                      <div className="text-sm text-gray-300">Countries</div>
                     </div>
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <div className="text-3xl font-bold text-blue-600">1000+</div>
-                      <div className="text-sm text-gray-600">Employees</div>
+                    <div className="bg-gray-800 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-white">Experienced</div>
+                      <div className="text-sm text-gray-300">Employees</div>
                     </div>
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                      <div className="text-3xl font-bold text-blue-600">50+</div>
-                      <div className="text-sm text-gray-600">Vessels</div>
+                    <div className="bg-gray-800 p-4 rounded-lg">
+                      <div className="text-2xl font-bold text-white">Many</div>
+                      <div className="text-sm text-gray-300">Vessels</div>
                     </div>
                   </div>
                 </div>
                 <div className="bg-gray-100 rounded-lg overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1595850295565-ec6fb9f2a9c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHNoaXBzfGVufDB8fDB8fHww" 
+                    src="/images/group.jpg" 
                     alt="Baksh Group Operations" 
                     className="w-full h-full object-cover"
                   />
@@ -226,7 +260,7 @@ const About: React.FC = () => {
               </div>
             </motion.section>
 
-            {/* Our Companies */}
+            {/* { Our Companies }
             <section>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Companies</h2>
               <div className="space-y-4">
@@ -338,30 +372,30 @@ const About: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
-            </section>
+            </section> */}
 
-            {/* Our Mission & Vision */}
-            <section className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold mb-8">Our Mission & Vision</h2>
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="bg-white/10 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold mb-3">Our Mission</h3>
-                    <p className="text-blue-100">
-                      To deliver exceptional value to our customers through innovative maritime and logistics solutions, 
-                      while maintaining the highest standards of safety, efficiency, and environmental responsibility.
-                    </p>
-                  </div>
-                  <div className="bg-white/10 p-6 rounded-lg">
-                    <h3 className="text-xl font-semibold mb-3">Our Vision</h3>
-                    <p className="text-blue-100">
-                      To be the most trusted and innovative maritime and logistics group, 
-                      setting industry benchmarks and creating sustainable value for all our stakeholders.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
+{/* Our Mission & Vision */}
+<section className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white">
+  <div className="max-w-4xl mx-auto">
+    <h2 className="text-3xl font-bold mb-8">Our Mission & Vision</h2>
+    <div className="grid md:grid-cols-2 gap-8">
+      <div className="bg-gray-800/90 p-6 rounded-lg backdrop-blur-sm">
+        <h3 className="text-xl font-semibold mb-3 text-white">Our Mission</h3>
+        <p className="text-gray-200">
+          To deliver exceptional value to our customers through innovative maritime and logistics solutions, 
+          while maintaining the highest standards of safety, efficiency, and environmental responsibility.
+        </p>
+      </div>
+      <div className="bg-gray-800/90 p-6 rounded-lg backdrop-blur-sm">
+        <h3 className="text-xl font-semibold mb-3 text-white">Our Vision</h3>
+        <p className="text-gray-200">
+          To be the most trusted and innovative maritime and logistics group, 
+          setting industry benchmarks and creating sustainable value for all our stakeholders.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
             {/* Our Values */}
             <section>
@@ -478,51 +512,52 @@ const About: React.FC = () => {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-                    <div className="md:flex">
-                      <div className="md:flex-shrink-0 md:w-1/3 bg-gray-100 flex items-center justify-center p-8">
-                        <div className="h-40 w-40 rounded-full bg-blue-100 flex items-center justify-center">
-                          {React.cloneElement(company.icon, { className: 'h-16 w-16 text-blue-600' })}
-                        </div>
-                      </div>
-                      <div className="p-8 md:w-2/3">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{company.name}</h1>
-                        <p className="text-blue-600 font-medium mb-6">Est. {company.year} • {company.employees} Employees</p>
-                        <p className="text-gray-600 mb-6 text-lg">{company.description}</p>
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {company.locations.map((location, i) => (
-                            <span key={i} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                              {location}
-                            </span>
+                  <motion.section 
+                    className="bg-white rounded-xl shadow-md p-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{company.name} at a Glance</h2>
+                    <div className="grid md:grid-cols-2 gap-8">
+                      <div>
+                        <p className="text-gray-600 mb-6 leading-relaxed">
+                          {company.description}
+                        </p>
+                        <p className="text-gray-600 mb-6 leading-relaxed">
+                          {company.id === 'baksh-investment' && "With over 15 years of experience in maritime investments, we have built a reputation for identifying and nurturing high-potential opportunities in the shipping and logistics sectors. Our strategic approach and deep industry knowledge enable us to deliver exceptional returns for our clients. We specialize in portfolio management, risk assessment, and strategic financial planning to help our clients achieve their investment goals in the maritime industry."}
+                          {company.id === 'yaaseen-shipping' && "Operating with a modern fleet and extensive global network, we provide reliable and efficient sea transportation services across international waters. Our commitment to safety, innovation, and customer satisfaction has made us a trusted partner in the maritime industry. We handle container shipping, bulk cargo, and specialized transport with state-of-the-art vessels and experienced crews ensuring timely and secure delivery of goods worldwide."}
+                          {company.id === 'yaaseen-pvt' && "Our specialized approach to shipping and logistics solutions ensures that every client receives tailored services that meet their specific requirements. We excel in container shipping, bulk cargo handling, and specialized transport services with unmatched efficiency. Our team of logistics experts works closely with clients to develop customized solutions that optimize supply chain performance and reduce operational costs while maintaining the highest standards of service delivery."}
+                          {company.id === 'uosl' && "As a full-service logistics provider, we offer comprehensive supply chain solutions from warehousing to last-mile delivery. Our advanced technology and experienced team ensure seamless transportation of goods across global markets with maximum efficiency and reliability. We provide end-to-end logistics services including freight forwarding, customs clearance, inventory management, and distribution services to help businesses streamline their operations and reach new markets effectively."}
+                        </p>
+                        <p className="text-gray-600 mb-6 leading-relaxed">
+                          {company.id === 'baksh-investment' && "Our investment philosophy centers on long-term value creation through careful analysis of market trends and emerging opportunities in the maritime sector. We leverage our deep industry expertise to identify undervalued assets and growth potential, providing our clients with diversified investment portfolios that deliver consistent returns while managing risk effectively."}
+                          {company.id === 'yaaseen-shipping' && "With our comprehensive fleet management system and strategic partnerships across major shipping routes, we ensure optimal vessel utilization and route efficiency. Our advanced tracking technology and real-time monitoring systems provide complete visibility throughout the shipping process, giving our clients peace of mind and enabling them to make informed decisions about their cargo movements."}
+                          {company.id === 'yaaseen-pvt' && "We understand that each client has unique shipping requirements and challenges. Our flexible service offerings include charter services, project cargo handling, and specialized equipment for sensitive or oversized shipments. Our commitment to continuous improvement and investment in modern infrastructure ensures we remain at the forefront of the shipping industry."}
+                          {company.id === 'uosl' && "Our integrated logistics platform combines advanced technology with personalized service to deliver exceptional results. We offer flexible solutions that scale with our clients' business needs, from small package delivery to large-scale freight operations. Our team of logistics professionals is dedicated to exceeding expectations and building lasting partnerships with our clients."}
+                        </p>
+                        {/* <div className="grid grid-cols-2 gap-4 mt-8">
+                          {company.stats.slice(0, 4).map((stat, i) => (
+                            <div key={i} className="bg-gray-800 p-4 rounded-lg">
+                              <div className="text-2xl font-bold text-white">{stat.value}</div>
+                              <div className="text-sm text-gray-300">{stat.label}</div>
+                            </div>
                           ))}
-                        </div>
-                        <a
-                          href={company.link}
-                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                          Visit {company.name.split(' ')[0]} Website
-                          <ArrowRight className="ml-2 -mr-1 h-4 w-4" />
-                        </a>
+                        </div> */}
+                      </div>
+                      <div className="bg-gray-100 rounded-lg overflow-hidden h-96 md:h-full">
+                        <img 
+                          src={company.id === 'baksh-investment' ? "/images/bill.jpg" :
+                               company.id === 'yaaseen-shipping' ? "/images/yal.jpg" :
+                               company.id === 'yaaseen-pvt' ? "/images/yap.jpg" :
+                               company.id === 'uosl' ? "/images/uosl.jpg" :
+                               "/images/bill.jpg"}
+                          alt={`${company.name} Operations`} 
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                     </div>
-                  </div>
-
-                  {/* Company Stats */}
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                    {company.stats.map((stat, i) => (
-                      <motion.div 
-                        key={i}
-                        className="bg-white p-6 rounded-xl shadow-sm text-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.1 }}
-                      >
-                        <div className="text-3xl font-bold text-blue-600 mb-2">{stat.value}</div>
-                        <div className="text-sm font-medium text-gray-500">{stat.label}</div>
-                      </motion.div>
-                    ))}
-                  </div>
+                  </motion.section>
 
                   {/* Company Values */}
                   <div className="mb-12">
@@ -584,7 +619,7 @@ const About: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* CTA Section */}
+                  {/* CTA Section
                   <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white">
                     <div className="max-w-3xl mx-auto text-center">
                       <h2 className="text-3xl font-bold mb-4">Ready to get started with {company.name}?</h2>
@@ -606,7 +641,7 @@ const About: React.FC = () => {
                         </a>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </motion.div>
               )
             ))}
@@ -614,81 +649,84 @@ const About: React.FC = () => {
         )}
       </main>
 
-      {/* Global Footer CTA */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to grow with us?</h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Join thousands of satisfied clients who trust our group for their maritime and logistics needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-8"
-              >
-                Get in Touch
-              </a>
-              <a
-                href="/services"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-8"
-              >
-                Explore Services
-              </a>
-            </div>
+{/* Global Footer CTA
+<footer className="bg-gray-900 text-white py-12 w-full mt-auto">
+  <div className="w-full">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center">
+        <h2 className="text-3xl font-bold mb-4">Ready to grow with us?</h2>
+        <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          Join thousands of satisfied clients who trust our group for their maritime and logistics needs.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/contact"
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-8"
+          >
+            Get in Touch
+          </a>
+          <a
+            href="/services"
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-8"
+          >
+            Explore Services
+          </a>
+        </div>
+      </div>
+
+      <div className="mt-12 pt-8 border-t border-gray-800">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Group Companies</h3>
+            <ul className="mt-4 space-y-2">
+              {companies.map((company) => (
+                <li key={company.id}>
+                  <a href={company.link} className="text-base text-gray-300 hover:text-white">
+                    {company.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="mt-12 pt-8 border-t border-gray-800">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Group Companies</h3>
-                <ul className="mt-4 space-y-2">
-                  {companies.map((company) => (
-                    <li key={company.id}>
-                      <a href={company.link} className="text-base text-gray-300 hover:text-white">
-                        {company.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Quick Links</h3>
-                <ul className="mt-4 space-y-2">
-                  <li><a href="/about" className="text-base text-gray-300 hover:text-white">About Us</a></li>
-                  <li><a href="/services" className="text-base text-gray-300 hover:text-white">Services</a></li>
-                  <li><a href="/contact" className="text-base text-gray-300 hover:text-white">Contact</a></li>
-                  <li><a href="/careers" className="text-base text-gray-300 hover:text-white">Careers</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
-                <ul className="mt-4 space-y-2">
-                  <li><a href="/privacy" className="text-base text-gray-300 hover:text-white">Privacy Policy</a></li>
-                  <li><a href="/terms" className="text-base text-gray-300 hover:text-white">Terms of Service</a></li>
-                  <li><a href="/cookies" className="text-base text-gray-300 hover:text-white">Cookie Policy</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Contact Us</h3>
-                <ul className="mt-4 space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-base text-gray-300">123 Maritime Ave, Karachi, Pakistan</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-base text-gray-300">+92 300 1234567</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-base text-gray-300">info@bakhsgroup.com</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-8 pt-8 border-t border-gray-800 text-center">
-              <p className="text-base text-gray-400">&copy; {new Date().getFullYear()} Baksh Group. All rights reserved.</p>
-            </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Quick Links</h3>
+            <ul className="mt-4 space-y-2">
+              <li><a href="/about" className="text-base text-gray-300 hover:text-white">About Us</a></li>
+              <li><a href="/services" className="text-base text-gray-300 hover:text-white">Services</a></li>
+              <li><a href="/contact" className="text-base text-gray-300 hover:text-white">Contact</a></li>
+              <li><a href="/careers" className="text-base text-gray-300 hover:text-white">Careers</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Legal</h3>
+            <ul className="mt-4 space-y-2">
+              <li><a href="/privacy" className="text-base text-gray-300 hover:text-white">Privacy Policy</a></li>
+              <li><a href="/terms" className="text-base text-gray-300 hover:text-white">Terms of Service</a></li>
+              <li><a href="/cookies" className="text-base text-gray-300 hover:text-white">Cookie Policy</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">Contact Us</h3>
+            <ul className="mt-4 space-y-2">
+              <li><span className="text-base text-gray-300">123 Maritime Ave, Karachi, Pakistan</span></li>
+              <li><span className="text-base text-gray-300">+92 300 1234567</span></li>
+              <li><span className="text-base text-gray-300">info@bakhsgroup.com</span></li>
+            </ul>
           </div>
         </div>
-      </footer>
+
+        <div className="mt-8 pt-8 border-t border-gray-800 text-center">
+          <p className="text-base text-gray-400">
+            &copy; {new Date().getFullYear()} Baksh Group. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer> */}
     </div>
   );
 };

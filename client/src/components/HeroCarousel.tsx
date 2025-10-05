@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Ship, Anchor, Truck, Check, Globe, Clock, Shield, Award, Users, BarChart2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Ship, Anchor, Truck, Check, Globe, Award } from 'lucide-react';
 import SimpleVideoBackground from './SimpleVideoBackground';
 import { carouselVideos } from '../assets/videos';
 
@@ -19,6 +19,13 @@ interface Slide {
 const HeroCarousel: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slideDirection, setSlideDirection] = useState(1);
+  const autoAdvanceRef = useRef<number | null>(null);
+  const slideStartRef = useRef<number>(0);
+  const prefersReducedMotionRef = useRef<boolean>(false);
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const isHeroVisibleRef = useRef<boolean>(true);
+
+  const TARGET_SLIDE_DURATION_MS = 5000;
 
   const slides: Slide[] = [
     {
@@ -71,25 +78,92 @@ const HeroCarousel: React.FC = () => {
     }
   ];
 
+  // Detect prefers-reduced-motion once on mount
   useEffect(() => {
-    const timer = setInterval(() => {
+    let removeMotionListener: (() => void) | null = null;
+    if (typeof window !== 'undefined' && 'matchMedia' in window) {
+      const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+      prefersReducedMotionRef.current = mql.matches;
+      const onChange = (e: MediaQueryListEvent) => {
+        prefersReducedMotionRef.current = e.matches;
+      };
+      if (typeof mql.addEventListener === 'function') {
+        mql.addEventListener('change', onChange);
+        removeMotionListener = () => mql.removeEventListener('change', onChange);
+      }
+    }
+
+    // Intersection observer to pause when hero isn't visible
+    let observer: IntersectionObserver | null = null;
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          const visible = !!entry?.isIntersecting;
+          isHeroVisibleRef.current = visible;
+          if (!visible) {
+            // pause
+            if (autoAdvanceRef.current !== null) {
+              window.clearTimeout(autoAdvanceRef.current);
+              autoAdvanceRef.current = null;
+            }
+          }
+        },
+        { root: null, threshold: 0.5 }
+      );
+      if (heroRef.current) observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (removeMotionListener) removeMotionListener();
+      if (observer && heroRef.current) observer.unobserve(heroRef.current);
+    };
+  }, []);
+
+  const clearAutoAdvance = () => {
+    if (autoAdvanceRef.current !== null) {
+      window.clearTimeout(autoAdvanceRef.current);
+      autoAdvanceRef.current = null;
+    }
+  };
+
+  const scheduleAdvanceAfterRemaining = () => {
+    if (!isHeroVisibleRef.current) return; // don't schedule when not visible
+    const now = performance.now();
+    const elapsed = now - slideStartRef.current;
+    const baseTarget = TARGET_SLIDE_DURATION_MS;
+    const totalTarget = prefersReducedMotionRef.current ? Math.min(baseTarget, 2500) : baseTarget;
+    const remaining = Math.max(0, totalTarget - elapsed);
+    clearAutoAdvance();
+    autoAdvanceRef.current = window.setTimeout(() => {
       setSlideDirection(1);
       setCurrentSlide(prev => (prev + 1) % slides.length);
-    }, 8000);
-    return () => clearInterval(timer);
-  }, [slides.length]);
+    }, remaining);
+  };
+
+  // When slide index changes, reset timers and mark the start time
+  useEffect(() => {
+    clearAutoAdvance();
+    slideStartRef.current = performance.now();
+    return () => {
+      clearAutoAdvance();
+    };
+  }, [currentSlide]);
 
   const nextSlide = () => {
+    clearAutoAdvance();
     setSlideDirection(1);
     setCurrentSlide(prev => (prev + 1) % slides.length);
   };
 
   const prevSlide = () => {
+    clearAutoAdvance();
     setSlideDirection(-1);
     setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length);
   };
 
   const goToSlide = (index: number) => {
+    clearAutoAdvance();
     setSlideDirection(index > currentSlide ? 1 : -1);
     setCurrentSlide(index);
   };
@@ -107,96 +181,7 @@ const HeroCarousel: React.FC = () => {
   );
   const currentSlideData: Slide = slides[safeCurrentSlideIndex]!;
 
-  // Animated popup component
-  type ColorVariant = 'dark' | 'mixed' | 'light';
-  
-  const AnimatedPopup = ({ 
-    delay, 
-    children, 
-    variant 
-  }: { 
-    delay: number; 
-    children: React.ReactNode;
-    variant?: ColorVariant;
-  }) => {
-    // Determine colors based on variant or current slide
-    const colors: ColorVariant = variant || 
-      (currentSlide === 0 ? 'dark' : currentSlide === 1 ? 'mixed' : 'light');
-    
-    const colorSchemes = {
-      dark: {
-        bg: 'from-blue-900/90 to-blue-800/90',
-        border: 'border-blue-400/30 hover:border-blue-300/60',
-        text: 'text-white',
-        textMuted: 'text-blue-100',
-        iconBg: 'bg-blue-500/90',
-        hoverBg: 'hover:bg-blue-700/90'
-      },
-      mixed: {
-        bg: 'from-teal-50/90 to-white/90',
-        border: 'border-teal-400/50 hover:border-teal-500/60',
-        text: 'text-teal-900',
-        textMuted: 'text-teal-700',
-        iconBg: 'bg-teal-500/90',
-        hoverBg: 'hover:bg-teal-100/90'
-      },
-      light: {
-        bg: 'from-red-50/95 to-red-100/95',
-        border: 'border-red-400/60 hover:border-red-500/70',
-        text: 'text-red-900',
-        textMuted: 'text-red-700',
-        iconBg: 'bg-red-600/90',
-        hoverBg: 'hover:bg-red-100/90'
-      }
-    };
-
-    const scheme = colorSchemes[colors];
-
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 20, scale: 0.95 }}
-        animate={{ 
-          opacity: 1, 
-          y: 0, 
-          scale: 1,
-          transition: { 
-            duration: 0.6, 
-            delay: delay,
-            type: 'spring',
-            stiffness: 120,
-            damping: 12,
-            mass: 0.5
-          }
-        }}
-        whileHover={{ 
-          y: -8,
-          scale: 1.05,
-          rotate: 0.5,
-          transition: { 
-            duration: 0.3,
-            ease: 'easeOut'
-          }
-        }}
-        className={`bg-gradient-to-br ${scheme.bg} p-4 rounded-xl shadow-xl border-2 ${scheme.border} transition-all duration-300 backdrop-blur-sm transform-gpu ${scheme.hoverBg} ${
-      currentSlide === 2 ? 'bg-opacity-100' : ''  // Ensure full opacity for red theme
-    }`}
-      >
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ 
-            opacity: 1, 
-            x: 0,
-            transition: { 
-              delay: delay + 0.2,
-              duration: 0.4
-            }
-          }}
-        >
-          {children}
-        </motion.div>
-      </motion.div>
-    );
-  };
+  // Removed unused AnimatedPopup component
 
   // Floating elements animation
   const FloatingElement = ({ delay, children, className = '' }: { delay: number; children: React.ReactNode; className?: string }) => (
@@ -262,16 +247,25 @@ const HeroCarousel: React.FC = () => {
               })
             }}
           >
-            {/* Video Background */}
-            <div className="absolute inset-0 z-0"></div>
-            <SimpleVideoBackground
-              videoSrc={
-                carouselVideos[safeCurrentSlideIndex]?.video ??
-                carouselVideos[0]?.video ??
-                ''
-              }
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {/* Media Background */}
+            <div className="absolute inset-0 z-0">
+              {carouselVideos[safeCurrentSlideIndex]?.type === 'video' ? (
+                <SimpleVideoBackground
+                  videoSrc={
+                    carouselVideos[safeCurrentSlideIndex]?.video ??
+                    carouselVideos[0]?.video ??
+                    ''
+                  }
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={carouselVideos[safeCurrentSlideIndex]?.image}
+                  alt={carouselVideos[safeCurrentSlideIndex]?.description}
+                  className="w-full h-full object-cover"
+                />
+              )}
+            </div>
 
             {/* Content */}
             <div className="relative z-10 h-full w-full flex items-center justify-center">
@@ -290,13 +284,17 @@ const HeroCarousel: React.FC = () => {
                     }}
                   >
                     <motion.div 
-                      className={`inline-flex items-center mb-6 px-6 py-2 rounded-full font-medium text-sm md:text-base ${
-                        currentSlide === 0 ? 'bg-black/20 text-blue-200 border border-blue-300/30' :
-                        currentSlide === 1 ? 'bg-white/80 text-blue-900' :
-                        'bg-white/90 text-blue-950'
+                      className={`inline-flex items-center mb-6 px-6 py-2 rounded-full font-medium text-sm md:text-base shadow-md ${
+                        currentSlide === 0 ? 'bg-white/90 text-blue-900 border border-white/30' :
+                        currentSlide === 1 ? 'bg-blue-900/90 text-white border border-blue-300/30' :
+                        'bg-white/95 text-red-900 border border-white/30'
                       }`}
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0, transition: { delay: 0.4 } }}
+                      initial={{ opacity: 0, y: prefersReducedMotionRef.current ? 0 : -20 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0, 
+                        transition: { delay: prefersReducedMotionRef.current ? 0 : 0.4, duration: prefersReducedMotionRef.current ? 0.2 : 0.5 } 
+                      }}
                     >
                       <Check className="w-4 h-4 mr-2" />
                       {currentSlideData.subtitle}
@@ -305,284 +303,73 @@ const HeroCarousel: React.FC = () => {
                     <motion.h1 
                       className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight ${
                         currentSlide === 0 ? 'text-white' :
-                        currentSlide === 1 ? 'text-blue-900' :
-                        'text-blue-950'
+                        currentSlide === 1 ? 'text-white' :
+                        'text-white'
                       }`}
                       style={{
-                        textShadow: currentSlide === 0 ? '0 2px 10px rgba(0,0,0,0.5)' : 'none'
+                        textShadow: '0 2px 4px rgba(0,0,0,0.7)'
                       }}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0, transition: { delay: 0.3 } }}
+                      initial={{ opacity: 0, y: prefersReducedMotionRef.current ? 0 : 20 }}
+                      animate={{ opacity: 1, y: 0, transition: { delay: prefersReducedMotionRef.current ? 0 : 0.3, duration: prefersReducedMotionRef.current ? 0.25 : 0.55 } }}
                     >
                       {currentSlideData.title}
                     </motion.h1>
                     
                     <motion.p 
                       className={`text-lg sm:text-xl md:text-2xl mb-8 leading-relaxed max-w-2xl ${
-                        currentSlide === 0 ? 'text-gray-200' :
-                        currentSlide === 1 ? 'text-gray-800' :
-                        'text-gray-800'
+                        currentSlide === 0 ? 'text-gray-100' :
+                        currentSlide === 1 ? 'text-gray-100' :
+                        'text-gray-100'
                       }`}
                       style={{
-                        textShadow: currentSlide === 0 ? '0 1px 3px rgba(0,0,0,0.8)' : 'none'
+                        textShadow: '0 1px 3px rgba(0,0,0,0.8)'
                       }}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0, transition: { delay: 0.5 } }}
+                      initial={{ opacity: 0, y: prefersReducedMotionRef.current ? 0 : 10 }}
+                      animate={{ opacity: 1, y: 0, transition: { delay: prefersReducedMotionRef.current ? 0 : 0.5, duration: prefersReducedMotionRef.current ? 0.2 : 0.5 } }}
                     >
                       {currentSlideData.description}
                     </motion.p>
                     
                     <motion.div
                       className="flex flex-wrap gap-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0, transition: { delay: 0.7 } }}
+                      initial={{ opacity: 0, y: prefersReducedMotionRef.current ? 0 : 20 }}
+                      animate={{ opacity: 1, y: 0, transition: { delay: prefersReducedMotionRef.current ? 0 : 0.7, duration: prefersReducedMotionRef.current ? 0.2 : 0.4 } }}
+                      onAnimationComplete={() => {
+                        // Schedule auto-advance only after CTA wrapper fully shown
+                        scheduleAdvanceAfterRemaining();
+                      }}
                     >
                       <a
                         href={currentSlideData.ctaLink}
                         className={`px-8 py-4 font-bold rounded-lg flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 ${
-                          currentSlide === 0 ? 'bg-blue-600 hover:bg-blue-700 text-white' :
-                          currentSlide === 1 ? 'bg-teal-600 hover:bg-teal-700 text-white' :
-                          'bg-red-600 hover:bg-red-700 text-white'
+                          currentSlide === 0 ? 'bg-white hover:bg-gray-100 text-blue-900' :
+                          currentSlide === 1 ? 'bg-blue-600 hover:bg-blue-700 text-white' :
+                          'bg-white hover:bg-gray-100 text-red-900'
                         }`}
+                        style={{
+                          color: currentSlide === 0 ? 'rgb(59 130 246)' :
+                            currentSlide === 1 ? 'rgb(255 255 255)' :
+                            'rgb(239 68 68)'
+                        }}
                       >
                         {currentSlideData.cta}
                         <ChevronRight className="w-5 h-5" />
                       </a>
                       <a
                         href="/contact"
-                        className={`px-6 py-3.5 bg-transparent border-2 font-medium rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${
-                          currentSlide === 0 ? 'border-blue-300 hover:border-blue-200 text-blue-100 hover:bg-blue-900/20' :
-                          currentSlide === 1 ? 'border-teal-400 hover:border-teal-300 text-teal-800 hover:bg-teal-100/50' :
-                          'border-red-400 hover:border-red-300 text-red-800 hover:bg-red-100/50'
+                        className={`px-6 py-3.5 border-2 font-medium rounded-lg flex items-center justify-center gap-2 transition-all duration-300 ${
+                          currentSlide === 0 ? 'border-white hover:border-blue-200 text-white hover:bg-white/10' :
+                          currentSlide === 1 ? 'border-white hover:border-blue-300 text-white hover:bg-white/10' :
+                          'border-white hover:border-red-200 text-white hover:bg-white/10'
                         }`}
+                        style={{
+                          color: currentSlide === 0 ? 'rgb(255 255 255)' :
+                            currentSlide === 1 ? 'rgb(255 255 255)' :
+                            'rgb(255 255 255)'
+                        }}
                       >
                         Contact Us
                       </a>
-                    </motion.div>
-                  </motion.div>
-
-                  <motion.div
-                    className="lg:text-right relative"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                      transition: { duration: 0.8, delay: 0.4 }
-                    }}
-                  >
-                    <AnimatePresence>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-                        <AnimatedPopup delay={0.5} variant={currentSlide === 0 ? 'dark' : currentSlide === 1 ? 'mixed' : 'light'}>
-                          <div className="flex items-center">
-                            <motion.div 
-                              className={`p-2 rounded-lg mr-3 ${
-                                currentSlide === 0 ? 'bg-blue-500/90' :
-                                currentSlide === 1 ? 'bg-teal-500/90' :
-                                'bg-red-500/90'
-                              }`}
-                              whileHover={{ 
-                                rotate: [0, -5, 5, 0],
-                                transition: { duration: 0.4 }
-                              }}
-                            >
-                              <Clock className="w-6 h-6 text-white" />
-                            </motion.div>
-                            <div>
-                              <div className={`text-2xl font-bold ${
-                                currentSlide === 0 ? 'text-white' :
-                                currentSlide === 1 ? 'text-teal-900' :
-                                'text-red-900'
-                              }`}>24/7</div>
-                              <div className={`text-xs font-medium ${
-                                currentSlide === 0 ? 'text-blue-100' :
-                                currentSlide === 1 ? 'text-teal-700' :
-                                'text-red-700'
-                              }`}>Support</div>
-                            </div>
-                          </div>
-                        </AnimatedPopup>
-                        
-                        <AnimatedPopup delay={0.7} variant={currentSlide === 0 ? 'dark' : currentSlide === 1 ? 'mixed' : 'light'}>
-                          <div className="flex items-center">
-                            <motion.div 
-                              className={`p-2 rounded-lg mr-3 ${
-                                currentSlide === 0 ? 'bg-blue-500/90' :
-                                currentSlide === 1 ? 'bg-teal-500/90' :
-                                'bg-red-500/90'
-                              }`}
-                              whileHover={{ 
-                                rotate: [0, -5, 5, 0],
-                                transition: { duration: 0.4 }
-                              }}
-                            >
-                              <Globe className="w-6 h-6 text-white" />
-                            </motion.div>
-                            <div>
-                              <div className={`text-2xl font-bold ${
-                                currentSlide === 0 ? 'text-white' :
-                                currentSlide === 1 ? 'text-teal-900' :
-                                'text-red-900'
-                              }`}>Global</div>
-                              <div className={`text-xs font-medium ${
-                                currentSlide === 0 ? 'text-blue-100' :
-                                currentSlide === 1 ? 'text-teal-700' :
-                                'text-red-700'
-                              }`}>Network</div>
-                            </div>
-                          </div>
-                        </AnimatedPopup>
-                        
-                        <AnimatedPopup delay={0.9} variant={currentSlide === 0 ? 'dark' : currentSlide === 1 ? 'mixed' : 'light'}>
-                          <div className="flex items-center">
-                            <motion.div 
-                              className={`p-2 rounded-lg mr-3 ${
-                                currentSlide === 0 ? 'bg-blue-500/90' :
-                                currentSlide === 1 ? 'bg-teal-500/90' :
-                                'bg-red-500/90'
-                              }`}
-                              whileHover={{ 
-                                rotate: [0, -5, 5, 0],
-                                transition: { duration: 0.4 }
-                              }}
-                            >
-                              <Shield className="w-6 h-6 text-white" />
-                            </motion.div>
-                            <div>
-                              <div className={`text-2xl font-bold ${
-                                currentSlide === 0 ? 'text-white' :
-                                currentSlide === 1 ? 'text-teal-900' :
-                                'text-red-900'
-                              }`}>Secure</div>
-                              <div className={`text-xs font-medium ${
-                                currentSlide === 0 ? 'text-blue-100' :
-                                currentSlide === 1 ? 'text-teal-700' :
-                                'text-red-700'
-                              }`}>Operations</div>
-                            </div>
-                          </div>
-                        </AnimatedPopup>
-                        
-                        {currentSlideData.stats?.map((stat, index) => (
-                          <AnimatedPopup 
-                            key={index} 
-                            delay={1.1 + (index * 0.2)}
-                            variant={currentSlide === 0 ? 'dark' : currentSlide === 1 ? 'mixed' : 'light'}
-                          >
-                            <div className="flex items-center">
-                              <motion.div 
-                                className={`p-2 rounded-lg mr-3 ${
-                                  currentSlide === 0 ? 'bg-blue-500/90' :
-                                  currentSlide === 1 ? 'bg-teal-500/90' :
-                                  'bg-red-500/90'
-                                }`}
-                                whileHover={{ 
-                                  rotate: [0, -5, 5, 0],
-                                  transition: { duration: 0.4 }
-                                }}
-                              >
-                                {index % 3 === 0 ? (
-                                  <Users className="w-6 h-6 text-white" />
-                                ) : index % 3 === 1 ? (
-                                  <BarChart2 className="w-6 h-6 text-white" />
-                                ) : (
-                                  <Award className="w-6 h-6 text-white" />
-                                )}
-                              </motion.div>
-                              <div>
-                                <div className={`text-2xl font-bold ${
-                                  currentSlide === 0 ? 'text-white' :
-                                  currentSlide === 1 ? 'text-teal-900' :
-                                  'text-red-900'
-                                }`}>
-                                  {stat.value}
-                                </div>
-                                <div className={`text-xs font-medium ${
-                                  currentSlide === 0 ? 'text-blue-100' :
-                                  currentSlide === 1 ? 'text-teal-700' :
-                                  'text-red-700'
-                                }`}>
-                                  {stat.label}
-                                </div>
-                              </div>
-                            </div>
-                          </AnimatedPopup>
-                        ))}
-                      </div>
-                    </AnimatePresence>
-                    
-                    <motion.div 
-                      className={`mt-8 p-6 backdrop-blur-sm rounded-2xl border-2 shadow-xl ${
-                        currentSlide === 0 ? 'bg-gradient-to-br from-blue-900/90 to-blue-800/90 border-blue-400/30' :
-                        currentSlide === 1 ? 'bg-gradient-to-br from-teal-50/90 to-white/90 border-teal-400/50' :
-                        'bg-gradient-to-br from-red-50/95 to-red-100/95 border-red-400/60'
-                      }`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
-                        opacity: 1, 
-                        y: 0, 
-                        transition: { 
-                          delay: 1.5,
-                          type: 'spring',
-                          stiffness: 100,
-                          damping: 12
-                        } 
-                      }}
-                    >
-                      <motion.h3 
-                        className={`text-lg font-semibold mb-4 ${
-                          currentSlide === 0 ? 'text-blue-200' :
-                          currentSlide === 1 ? 'text-teal-800' :
-                          'text-gray-800'
-                        }`}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ 
-                          opacity: 1, 
-                          x: 0,
-                          transition: { 
-                            delay: 1.7,
-                            duration: 0.4
-                          }
-                        }}
-                      >
-                        Why Choose Us
-                      </motion.h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        {[
-                          { value: '70+', label: 'Years Experience' },
-                          { value: '500+', label: 'Global Partners' },
-                          { value: '24/7', label: 'Customer Support' },
-                          { value: '99.9%', label: 'Satisfaction' }
-                        ].map((item, i) => (
-                          <motion.div 
-                            key={i}
-                            className={`text-center p-3 rounded-lg transition-colors duration-200 ${
-                              currentSlide === 0 ? 'bg-blue-500/10 hover:bg-blue-500/20' :
-                              currentSlide === 1 ? 'bg-teal-100/80 hover:bg-teal-200/60' :
-                              'bg-red-100/90 hover:bg-red-200/80'
-                            }`}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                          >
-                            <motion.div 
-                              className={`text-2xl font-bold ${
-                                currentSlide === 0 ? 'text-white' :
-                                currentSlide === 1 ? 'text-teal-900' :
-                                'text-red-700'
-                              }`}
-                              whileHover={{ scale: 1.1 }}
-                            >
-                              {item.value}
-                            </motion.div>
-                            <div className={`text-xs font-medium ${
-                              currentSlide === 0 ? 'text-blue-200' :
-                              currentSlide === 1 ? 'text-teal-700' :
-                              'text-red-600'
-                            }`}>
-                              {item.label}
-                            </div>
-                          </motion.div>
-                        ))}
-                      </div>
                     </motion.div>
                   </motion.div>
                 </div>

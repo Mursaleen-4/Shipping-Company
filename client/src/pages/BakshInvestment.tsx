@@ -21,7 +21,6 @@ import {
   Link2,
   Handshake
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
 
 // NOTE: This component assumes you have Tailwind configured.
 // If you used "primary-xxx" color names in your design system,
@@ -97,18 +96,9 @@ const BakshInvestment: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-gray-900 overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0">
-          <div 
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${pageBackgrounds.bakshInvestment})`
-            }}
-            aria-hidden="true"
-          />
-          <div className="absolute inset-0 bg-black/30"></div>
-        </div>
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-black overflow-hidden">
+        {/* Solid Black Background */}
+        <div className="absolute inset-0 bg-black"></div>
 
         {/* Content */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">

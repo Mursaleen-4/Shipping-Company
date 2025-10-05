@@ -145,15 +145,10 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat"
-      style={{
-        backgroundImage: `url(${pageBackgrounds.gallery})`
-      }}
-    >
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-black"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <motion.div 
@@ -163,11 +158,9 @@ const Gallery: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Our <span className="text-blue-300">Gallery</span>
+            <span className="text-blue-300">Our Gallery</span>
             </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Explore our world-class facilities, modern fleet, and global operations through our comprehensive image gallery.
-            </p>
+
           </motion.div>
         </div>
       </section>
@@ -176,7 +169,7 @@ const Gallery: React.FC = () => {
       <section className="py-12 bg-white/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-            {/* Search Bar */}
+            {/* { Search Bar }
             <div className="relative flex-1 max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
@@ -186,7 +179,7 @@ const Gallery: React.FC = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
-            </div>
+            </div> */}
 
             {/* Category Filter */}
             <div className="flex flex-wrap gap-2">

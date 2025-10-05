@@ -47,16 +47,16 @@ const Navigation: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-2 sm:py-3">
           {/* Logo */}
-          <Link
+            <Link
             to="/"
             className="group flex items-center py-2 flex-shrink-0 z-50"
           >
             <img
-              src="/images/Bakhs_group.jpg"
+              src="/images/baksh1.png"
               alt="Baksh Group Logo"
               className="h-12 w-auto mr-2"
             />
-          </Link>
+          </Link>  
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-2">

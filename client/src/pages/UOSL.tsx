@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, Container, Target, Clock, Shield, Truck } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
 
 const UOSL: React.FC = () => {
   const stats = [
@@ -23,14 +22,8 @@ const UOSL: React.FC = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-800 to-blue-900 text-white pt-28 pb-20 sm:py-24 md:py-32">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-40"
-          style={{
-            backgroundImage: `url(${pageBackgrounds.uosl})`
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black/30"></div>
+      <section className="relative bg-black text-white pt-28 pb-20 sm:py-24 md:py-32">
+        <div className="absolute inset-0 bg-black"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-8 sm:py-16">
           <div className="text-center">
             <motion.div 

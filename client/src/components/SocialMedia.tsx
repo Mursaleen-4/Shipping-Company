@@ -41,17 +41,7 @@ const SocialMedia: React.FC = () => {
   };
 
   return (
-    <section className="py-12 bg-gradient-to-br from-primary-600 via-primary-700 to-blue-800 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" 
-             style={{
-               backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='m0 40l40-40h-40v40z'/%3E%3C/g%3E%3C/svg%3E")`,
-               backgroundSize: '40px 40px'
-             }}
-        />
-      </div>
-
+    <section className="py-12 relative bg-blue-50 overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -59,15 +49,15 @@ const SocialMedia: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-6 backdrop-blur-sm">
-            <ExternalLink className="w-8 h-8 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-6">
+            <ExternalLink className="w-8 h-8 text-blue-600" />
           </div>
           
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-blue-800 mb-4">
             GET SOCIAL WITH US
           </h2>
           
-          <p className="text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-blue-700 max-w-2xl mx-auto leading-relaxed">
             Stay connected and get the latest updates on our maritime services, industry insights, 
             and company developments across all our social media platforms.
           </p>
@@ -79,7 +69,7 @@ const SocialMedia: React.FC = () => {
           initial="hidden"
           animate="visible"
         >
-          {socialPlatforms.slice(0,2).map((platform, idx) => {
+          {socialPlatforms.map((platform, idx) => {
             const Icon = platform.icon;
             return (
               <motion.div
@@ -93,21 +83,21 @@ const SocialMedia: React.FC = () => {
                   href={platform.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center transition-all duration-300 hover:bg-white/20 border border-white/20 hover:border-white/40 h-full"
+                  className="block bg-white rounded-2xl p-6 text-center transition-all duration-300 hover:shadow-lg border border-blue-100 h-full"
                 >
-                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${platform.color} mb-4 mx-auto shadow-lg group-hover:shadow-xl transition-all duration-300`}>
+                  <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${platform.color} mb-4 mx-auto shadow-md`}>
                     <Icon className="w-8 h-8 text-white" />
                   </div>
                   
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-yellow-300 transition-colors">
+                  <h3 className="text-xl font-bold text-blue-800 mb-3 group-hover:text-blue-600 transition-colors">
                     {platform.name}
                   </h3>
                   
-                  <p className="text-blue-100 text-sm leading-relaxed group-hover:text-white transition-colors">
+                  <p className="text-blue-600 text-sm leading-relaxed group-hover:text-blue-800 transition-colors">
                     {platform.description}
                   </p>
                   
-                  <div className="mt-4 inline-flex items-center text-yellow-300 font-semibold group-hover:text-yellow-200 transition-colors">
+                  <div className="mt-4 inline-flex items-center text-blue-700 font-semibold group-hover:text-blue-900 transition-colors">
                     <span className="mr-2">Follow Us</span>
                     <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -116,66 +106,6 @@ const SocialMedia: React.FC = () => {
             );
           })}
         </motion.div>
-
-        {/* Social Media Stats */}
-        <motion.div
-          className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 lg:p-8 border border-white/20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <motion.div
-                className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-2"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.6, type: "spring", stiffness: 100 }}
-              >
-                10K+
-              </motion.div>
-              <div className="text-blue-100 font-medium">Followers</div>
-            </div>
-            
-            <div>
-              <motion.div
-                className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-2"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.7, type: "spring", stiffness: 100 }}
-              >
-                500+
-              </motion.div>
-              <div className="text-blue-100 font-medium">Posts Shared</div>
-            </div>
-            
-            <div>
-              <motion.div
-                className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-2"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.8, type: "spring", stiffness: 100 }}
-              >
-                24/7
-              </motion.div>
-              <div className="text-blue-100 font-medium">Active Support</div>
-            </div>
-            
-            <div>
-              <motion.div
-                className="text-4xl lg:text-5xl font-bold text-yellow-300 mb-2"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 100 }}
-              >
-                70+
-              </motion.div>
-              <div className="text-blue-100 font-medium">Years Online</div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Newsletter section removed */}
       </div>
     </section>
   );

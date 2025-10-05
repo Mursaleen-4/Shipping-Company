@@ -178,30 +178,19 @@ const Schedule: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div 
-        className="relative h-64 md:h-80 flex items-center justify-center bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${pageBackgrounds.about})` }}
-      >
-        <div className="text-center px-4">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-white mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Vessel Schedule
-          </motion.h1>
-          <motion.p 
-            className="text-lg text-blue-100 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Track our vessels in real-time and view detailed voyage schedules
-          </motion.p>
-        </div>
-      </div>
+{/* Page Title */}
+<div className="text-center py-12">
+  <motion.h1
+    className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight"
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    Vessel Schedule
+  </motion.h1>
+  <div className="mt-2 h-1 w-24 bg-blue-600 mx-auto rounded-full"></div>
+</div>
+
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

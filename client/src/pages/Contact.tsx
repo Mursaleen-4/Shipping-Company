@@ -14,9 +14,6 @@ import {
   ExternalLink,
   Calendar
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
-
-
 const Contact: React.FC = () => {
   const [selectedOffice, setSelectedOffice] = useState('karachi');
   const [contactForm, setContactForm] = useState({
@@ -117,14 +114,8 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="relative text-white py-16 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${pageBackgrounds.contact})`
-          }}
-        />
-        <div className="absolute inset-0 bg-black/30" />
+      <section className="relative text-white py-16 overflow-hidden bg-black">
+        <div className="absolute inset-0 bg-black"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32" />
         

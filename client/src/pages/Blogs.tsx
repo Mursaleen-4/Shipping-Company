@@ -139,32 +139,21 @@ const Blogs: React.FC = () => {
   const regularPosts = sortedPosts.filter(post => !post.featured);
 
   return (
-    <div 
-      className="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat"
-      style={{
-        backgroundImage: `url(${pageBackgrounds.blogs})`
-      }}
-    >
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              News & <span className="text-blue-300">Blogs</span>
-            </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Stay updated with the latest industry insights, company news, and expert analysis from the world of maritime shipping and logistics.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+    <div className="min-h-screen bg-black">
+{/* Page Title */}
+<section className="text-center py-12">
+  <motion.h1
+    className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-tight"
+    initial={{ opacity: 0, y: 10 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+  >
+    <span className="text-blue-600">News & Blogs</span>
+  </motion.h1>
+  <div className="mt-2 h-1 w-24 bg-blue-600 mx-auto rounded-full"></div>
+
+</section>
+
 
       {/* Search and Filter Section */}
       <section className="py-12 bg-white/90 backdrop-blur-sm">
@@ -200,7 +189,7 @@ const Blogs: React.FC = () => {
               ))}
             </div>
 
-            {/* Sort Dropdown */}
+            {/* { Sort Dropdown }
             <div className="relative">
               <select
                 value={sortBy}
@@ -212,7 +201,7 @@ const Blogs: React.FC = () => {
                 <option value="readTime">Read Time</option>
               </select>
               <ChevronDown className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

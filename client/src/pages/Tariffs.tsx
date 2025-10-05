@@ -1,44 +1,38 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FileText, DollarSign } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
 
 const Tariffs: React.FC = () => {
   return (
-    <div 
-      className="min-h-screen relative bg-cover bg-center bg-fixed bg-no-repeat py-16 px-4 sm:px-6 lg:px-8"
-      style={{
-        backgroundImage: `url(${pageBackgrounds.tariffs})`
-      }}
-    >
-      <div className="absolute inset-0 bg-black/20"></div>
-      <div className="relative z-10 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-white py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 md:p-10"
+          className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8"
         >
-          <div className="flex items-start md:items-center md:justify-between flex-col md:flex-row gap-4">
-            <div className="flex items-center">
-              <div className="p-3 bg-blue-100 rounded-xl mr-3">
-                <DollarSign className="w-6 h-6 text-blue-600" />
+          <div className="flex flex-col space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex items-center">
+                <div className="p-3 bg-blue-50 rounded-xl mr-4">
+                  <DollarSign className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Tariffs</h1>
+                  <p className="text-gray-600">Our standard rates and downloadable tariff sheets.</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">Tariffs</h1>
-                <p className="text-gray-600">Our standard rates and downloadable tariff sheets.</p>
-              </div>
+              <a
+                href="#"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors self-start md:self-center"
+              >
+                <FileText className="w-4 h-4 mr-2" />
+                Download PDF
+              </a>
             </div>
-            <a
-              href="#"
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <FileText className="w-4 h-4 mr-2" />
-              Download PDF
-            </a>
-          </div>
 
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
               { title: 'Liner Shipping', desc: 'Base ocean freight and surcharges.' },
               { title: 'Freight Forwarding', desc: 'Air, sea and inland rates overview.' },
@@ -52,6 +46,8 @@ const Tariffs: React.FC = () => {
                 <p className="text-gray-600">{item.desc}</p>
               </div>
             ))}
+          </div>
+
           </div>
 
           <p className="mt-8 text-sm text-gray-500">

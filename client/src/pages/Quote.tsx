@@ -116,15 +116,10 @@ const Quote: React.FC = () => {
   }
 
   return (
-    <div 
-      className="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat"
-      style={{
-        backgroundImage: `url(${pageBackgrounds.quote})`
-      }}
-    >
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-black"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <motion.div 

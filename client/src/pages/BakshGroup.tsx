@@ -14,7 +14,6 @@ import {
   TrendingUp,
   HeartHandshake
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
 
 const BakshGroup: React.FC = () => {
   const groupOverview = {
@@ -107,50 +106,98 @@ const BakshGroup: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-gray-900 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={pageBackgrounds.bakshGroup || '/images/group-bg.jpg'}
-            alt="Baksh Group"
-            className="w-full h-full object-cover opacity-40"
-          />
+      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-gray-900 to-black overflow-hidden">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-600/20 rounded-full filter blur-3xl -mr-40 -mt-40"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-900/20 rounded-full filter blur-3xl -ml-40 -mb-40"></div>
+          <div className="absolute top-1/2 left-1/2 w-1/2 h-1/2 bg-blue-500/10 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
-          <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+
+        {/* Content */}
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="mb-8"
           >
-            Baksh Group
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-gray-200 max-w-3xl mx-auto"
+            <span className="inline-block px-4 py-2 bg-blue-600/20 text-blue-300 text-sm font-medium rounded-full mb-6 border border-blue-400/30">
+              Since 1951
+            </span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              Building Global <span className="bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">Connections</span>
+            </h1>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              Seven decades of excellence in shipping, logistics, and investment solutions across 20+ countries
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+              <motion.a
+                href="#our-companies"
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-1"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Explore Our Companies
+              </motion.a>
+              <motion.a
+                href="/contact"
+                className="px-8 py-4 bg-transparent border-2 border-white/20 hover:border-blue-400 text-white font-medium rounded-lg transition-all duration-300 hover:bg-white/5"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Get in Touch
+              </motion.a>
+            </div>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-5xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Seven Decades of Excellence in Shipping, Logistics, and Investment
-          </motion.p>
+            {[
+              { value: '70+', label: 'Years of Experience' },
+              { value: '20+', label: 'Countries Served' },
+              { value: '500+', label: 'Dedicated Team' },
+              { value: '24/7', label: 'Global Support' }
+            ].map((stat, index) => (
+              <div key={index} className="backdrop-blur-sm bg-white/5 p-4 rounded-xl border border-white/10">
+                <div className="text-3xl font-bold text-blue-400 mb-2">{stat.value}</div>
+                <div className="text-sm text-gray-300">{stat.label}</div>
+              </div>
+            ))}
+          </motion.div>
         </div>
-      </section>
 
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <span className="text-sm text-gray-400 mb-2">Scroll to explore</span>
+          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center p-1">
+            <motion.div 
+              className="w-1 h-2 bg-gray-400 rounded-full"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+            />
+          </div>
+        </motion.div>
+      </section>
+      
       {/* Overview Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Legacy</h2>
-            <div className="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
-            <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-              {groupOverview.description}
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="bg-blue-50 p-6 rounded-lg text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div className="bg-black p-6 rounded-lg text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">{groupOverview.foundingYear}+</div>
-              <h3 className="text-lg font-semibold text-gray-800">Years of Excellence</h3>
-              <p className="text-gray-600">Since our founding</p>
+              <h3 className="text-lg font-semibold text-white">Years of Excellence</h3>
+              <p className="text-gray-300">Since our founding</p>
             </div>
             <div className="bg-blue-50 p-6 rounded-lg text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">{groupOverview.employees}</div>
