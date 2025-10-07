@@ -85,7 +85,7 @@ const BakshInvestment: React.FC = () => {
   ];
 
   const keyStrengths = [
-    { icon: Clock, title: '73+ Years Experience', description: 'Deep industry knowledge since 1951' },
+    { icon: Clock, title: '70+ Years Experience', description: 'Deep industry knowledge since 1951' },
     { icon: Users, title: 'Dedicated Team', description: 'Experienced and qualified professionals' },
     { icon: FileText, title: 'Regulatory Expertise', description: 'Strong relationships with government bodies' },
     { icon: Cpu, title: 'Advanced Technology', description: 'In-house shipping software with EDI capabilities' },
@@ -98,7 +98,7 @@ const BakshInvestment: React.FC = () => {
       {/* Hero Section */}
       <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-black overflow-hidden">
         {/* Solid Black Background */}
-        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-white"></div>
 
         {/* Content */}
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -113,19 +113,19 @@ const BakshInvestment: React.FC = () => {
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.15, duration: 0.45 }}
-                className="inline-block bg-white/5 border border-white/10 backdrop-blur-sm px-5 py-2 rounded-full mb-6"
+                className="inline-block bg-blue-600/10 border border-blue-200 backdrop-blur-sm px-5 py-2 rounded-full mb-6"
               >
-                <span className="text-primary-300 font-medium tracking-wider text-xs sm:text-sm">PIONEERS IN MARITIME EXCELLENCE</span>
+                <span className="text-blue-700 font-medium tracking-wider text-xs sm:text-sm">PIONEERS IN MARITIME EXCELLENCE</span>
               </motion.div>
               
               <motion.h1 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight text-white"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight text-gray-900"
               >
-                Navigating <span className="text-primary-300">Global Trade</span>
-                <span className="block text-lg sm:text-2xl md:text-3xl font-light">with Unmatched Expertise</span>
+                Navigating <span className="text-blue-600">Global Trade</span>
+                <span className="block text-lg sm:text-2xl md:text-3xl font-light text-gray-700">with Unmatched Expertise</span>
               </motion.h1>
               
               <motion.div 
@@ -139,7 +139,7 @@ const BakshInvestment: React.FC = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-sm sm:text-base md:text-lg text-white/90 leading-relaxed max-w-3xl mx-auto mb-6 sm:mb-10 px-2 sm:px-0"
+                className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto mb-6 sm:mb-10 px-2 sm:px-0"
               >
                 For over five decades, Baksh Investment Limited has been at the forefront of maritime innovation, connecting markets and powering global trade with unwavering commitment and excellence.
               </motion.p>
@@ -150,19 +150,19 @@ const BakshInvestment: React.FC = () => {
                 transition={{ delay: 0.7, duration: 0.8 }}
                 className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm md:text-base px-2 sm:px-0"
               >
-                <div className="flex items-center text-primary-300">
+                <div className="flex items-center text-blue-700">
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>73+ Years of Excellence</span>
+                  <span>70+ Years of Excellence</span>
                 </div>
-                <div className="flex items-center text-primary-300">
+                <div className="flex items-center text-blue-700">
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Global Network</span>
                 </div>
-                <div className="flex items-center text-primary-300">
+                <div className="flex items-center text-blue-700">
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
@@ -175,7 +175,7 @@ const BakshInvestment: React.FC = () => {
       </section>
 
       {/* Overview Section */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white">
+      <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
             <motion.div
@@ -205,7 +205,7 @@ const BakshInvestment: React.FC = () => {
               viewport={{ once: true }}
               className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-md"
             >
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">At a Glance</h3>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-6"></h3>
               <div className="space-y-4">
                 <div className="flex items-start">
                   <Building2 className="h-6 w-6 text-primary-600 mt-1 mr-3 flex-shrink-0" />
@@ -426,9 +426,9 @@ const BakshInvestment: React.FC = () => {
         </div>
       </section>
 
-      {/* Enhanced CTA Section */}
+      {/* Enhanced CTA Section
       <section className="relative overflow-hidden text-white py-12 sm:py-16 md:py-20">
-        {/* Background Image with Overlay */}
+        { Background Image with Overlay }
         <div className="absolute inset-0">
           <img
             src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg"
@@ -498,11 +498,11 @@ const BakshInvestment: React.FC = () => {
             </div>
           </motion.div>
           
-          {/* Animated elements */}
+          { Animated elements }
           <div className="hidden sm:block absolute -bottom-20 -right-20 w-40 h-40 rounded-full bg-primary-400 bg-opacity-20 filter blur-3xl"></div>
           <div className="hidden sm:block absolute -top-10 -left-10 w-32 h-32 rounded-full bg-blue-400 bg-opacity-20 filter blur-3xl"></div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

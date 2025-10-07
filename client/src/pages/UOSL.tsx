@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, Container, Target, Clock, Shield, Truck } from 'lucide-react';
+import { Container, Target, Clock, Shield, Truck } from 'lucide-react';
 
 const UOSL: React.FC = () => {
   const stats = [
     { value: '24/7', label: 'Operations', icon: Clock },
-    { value: '10+', label: 'Years Experience', icon: Container },
+    { value: 'More than 10', label: 'Years Experience', icon: Container },
     { value: '50+', label: 'Dedicated Staff', icon: Shield },
     { value: '100%', label: 'Customer Satisfaction', icon: Target }
   ];
@@ -22,31 +22,33 @@ const UOSL: React.FC = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative bg-black text-white pt-28 pb-20 sm:py-24 md:py-32">
-        <div className="absolute inset-0 bg-black"></div>
+      <section className="relative bg-white text-gray-900 pt-28 pb-20 sm:py-24 md:py-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj4KICA8cGF0aCBkPSJNNTAgMjVjMC0xMC0xMC0xNS0yMC0xNS0xMSAwLTIwIDUtMjAgMTVzMTAgMTUgMjAgMTUgMjAtNSAyMC0xNVoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg1OSwxMzAsMjQ2LDAuMDUpIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+')]"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-8 sm:py-16">
           <div className="text-center">
-            <motion.div 
+            {/* <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6"
+              className="inline-block bg-blue-600/10 border border-blue-100 backdrop-blur-sm px-5 py-2 rounded-full mb-6"
             >
-              <p className="text-primary-200 font-medium">SINCE 2013</p>
-            </motion.div>
+              <p className="text-blue-700 font-medium tracking-wider text-sm">SINCE 2013</p>
+            </motion.div> */}
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight max-w-4xl mx-auto px-4"
             >
-              Pioneering Excellence in Container Logistics
+              Pioneering Excellence in <span className="text-blue-600">Container Logistics</span>
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-lg sm:text-xl md:text-2xl text-primary-100 max-w-4xl mx-auto leading-relaxed mb-8 sm:mb-10 px-4"
+              className="text-lg sm:text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8 sm:mb-10 px-4"
             >
               Your trusted partner for comprehensive container management and logistics solutions across Pakistan
             </motion.p>
@@ -56,39 +58,39 @@ const UOSL: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
+                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center mb-4">
-                  <Shield className="w-6 h-6 text-primary-300" />
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Shield className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">Secure Storage</h3>
-                <p className="text-primary-200">State-of-the-art facilities with 24/7 surveillance and advanced security systems to ensure your cargo is always protected.</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Secure Storage</h3>
+                <p className="text-gray-600">State-of-the-art facilities with 24/7 surveillance and advanced security systems to ensure your cargo is always protected.</p>
               </motion.div>
               
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
-                className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
+                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center mb-4">
-                  <Truck className="w-6 h-6 text-primary-300" />
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Truck className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">Nationwide Network</h3>
-                <p className="text-primary-200">Extensive logistics network connecting major ports and industrial hubs across Pakistan for seamless operations.</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Nationwide Network</h3>
+                <p className="text-gray-600">Extensive logistics network connecting major ports and industrial hubs across Pakistan for seamless operations.</p>
               </motion.div>
               
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
-                className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 hover:bg-white/10 transition-colors"
+                className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center mb-4">
-                  <Container className="w-6 h-6 text-primary-300" />
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                  <Container className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">Container Solutions</h3>
-                <p className="text-primary-200">Comprehensive container management services including storage, maintenance, and tracking for all your shipping needs.</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Container Solutions</h3>
+                <p className="text-gray-600">Comprehensive container management services including storage, maintenance, and tracking for all your shipping needs.</p>
               </motion.div>
             </div>
           </div>
@@ -101,31 +103,46 @@ const UOSL: React.FC = () => {
         <div className="absolute -left-20 -bottom-20 w-96 h-96 bg-primary-100 rounded-full opacity-10"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="mb-12 lg:mb-0 relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[500px]">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1608889825205-eeb953fcb6e8?q=80&w=1500')] bg-cover bg-center"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-800/80 to-transparent"></div>
-                <div className="absolute inset-0 flex items-end p-8">
-                  <div className="text-left">
-                    <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-4">
-                      <h3 className="text-2xl font-bold text-white">Our Mission</h3>
-                    </div>
-                    <p className="text-lg text-white leading-relaxed">To provide exceptional container management and logistics services with efficiency, reliability, and innovation.</p>
-                    <div className="mt-6 flex space-x-4">
-                      <div className="w-12 h-1 bg-yellow-400"></div>
-                      <div className="w-8 h-1 bg-yellow-400"></div>
-                      <div className="w-4 h-1 bg-yellow-400"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          <motion.div
+  initial={{ opacity: 0, x: -50 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+  className="mb-12 lg:mb-0"
+>
+  <div className="relative rounded-xl overflow-hidden shadow-xl h-[500px] bg-gray-50 border border-gray-100">
+    <div 
+      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"
+      style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1608889825205-eeb953fcb6e8?q=80&w=1500')",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/90 to-blue-800/80" />
+    </div>
+    <div className="absolute inset-0 flex items-end p-8 sm:p-10">
+      <div className="space-y-5 max-w-lg">
+        <div>
+          <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-3">
+            Our Mission
+          </span>
+          <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+            Delivering Excellence in Container Logistics
+          </h3>
+        </div>
+        <p className="text-lg text-blue-100 leading-relaxed">
+          To provide exceptional container management and logistics services with efficiency, reliability, and innovation at the core of everything we do.
+        </p>
+        <div className="flex items-center space-x-4 pt-2">
+          <div className="w-12 h-1 bg-blue-400 rounded-full" />
+          <div className="w-8 h-1 bg-blue-400/70 rounded-full" />
+          <div className="w-4 h-1 bg-blue-400/50 rounded-full" />
+        </div>
+      </div>
+    </div>
+  </div>
+</motion.div>
             
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -188,7 +205,7 @@ const UOSL: React.FC = () => {
 
 
 
-      {/* CTA Section */}
+      {/* CTA Section
       <section className="bg-gradient-to-r from-primary-700 to-primary-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Optimize Your Logistics?</h2>
@@ -212,7 +229,7 @@ const UOSL: React.FC = () => {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

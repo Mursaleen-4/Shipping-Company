@@ -10,7 +10,7 @@ import {
   Clock,
   CheckCircle
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
+// import { pageBackgrounds } from '../assets/videos';
 
 const YaaseenShippingPVT: React.FC = () => {
   // Animation variants are defined inline where used
@@ -81,17 +81,17 @@ const YaaseenShippingPVT: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-gray-900 overflow-hidden">
-        <div className="absolute inset-0">
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center bg-white overflow-hidden">
+        {/* <div className="absolute inset-0">
           <img
             src={pageBackgrounds.yaaseenAbout || '/images/yaaseen-shipping-bg.jpg'}
             alt="Yaaseen Shipping Lines (PVT) Ltd"
             className="w-full h-full object-cover opacity-40"
           />
-        </div>
+        </div> */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-24">
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-700 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -99,7 +99,7 @@ const YaaseenShippingPVT: React.FC = () => {
             Yaaseen Shipping Lines (PVT) Ltd
           </motion.h1>
           <motion.p 
-            className="text-xl text-blue-200 max-w-3xl mx-auto"
+            className="text-xl text-blue-400 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -228,7 +228,7 @@ const YaaseenShippingPVT: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Ship With Us?</h2>
@@ -250,7 +250,7 @@ const YaaseenShippingPVT: React.FC = () => {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

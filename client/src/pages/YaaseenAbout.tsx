@@ -6,13 +6,11 @@ import {
   Users, 
   Award, 
   Target, 
-  Eye,
-  ArrowRight,
   Building2,
   Truck,
   Container
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
+// import { pageBackgrounds } from '../assets/videos';
 
 const About: React.FC = () => {
   const fadeInUp = {
@@ -83,22 +81,32 @@ const About: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj4KICA8cGF0aCBkPSJNNTAgMjVjMC0xMC0xMC0xNS0yMC0xNS0xMSAwLTIwIDUtMjAgMTVzMTAgMTUgMjAgMTUgMjAtNSAyMC0xNVoiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSg1OSwxMzAsMjQ2LDAuMDUpIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+')]"></div>
+        </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <motion.div 
-            className="text-center"
+            className="text-center py-16 sm:py-24"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              About <span className="text-blue-300">Yaaseen Shipping</span>
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-block bg-blue-600/10 border border-blue-100 backdrop-blur-sm px-5 py-2 rounded-full mb-6"
+            >
+              <span className="text-blue-700 font-medium tracking-wider text-sm">ABOUT OUR COMPANY</span>
+            </motion.div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              About <span className="text-blue-600">Yaaseen Shipping</span>
             </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Leading maritime services provider with a commitment to excellence in global shipping and logistics. 
               We connect businesses worldwide through innovative solutions and unwavering reliability.
             </p>
@@ -130,10 +138,10 @@ const About: React.FC = () => {
                 competitive advantages for businesses worldwide. Our comprehensive network and specialized 
                 expertise enable us to deliver simplified, cost-effective logistics solutions.
               </p>
-              <div className="flex items-center text-blue-600 font-semibold group">
+              {/* <div className="flex items-center text-blue-600 font-semibold group">
                 <span className="mr-2">Learn more about our journey</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </div>
+              </div> */}
             </div>
             <div className="relative">
               <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white">
@@ -244,7 +252,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* { Mission & Vision }
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12">
@@ -285,9 +293,9 @@ const About: React.FC = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Call to Action */}
+      {/* { Call to Action }
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -321,7 +329,7 @@ const About: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Building2, Ship, Truck, ArrowRight, ChevronDown, ChevronUp, Anchor, Briefcase, Globe, Users, Target, BarChart2, Clock, Shield, Award } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
+import { motion  } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import {  Ship, Truck, ArrowRight,Anchor, Briefcase, Globe, Users, Target, BarChart2, Clock, Shield, Award } from 'lucide-react';
+
 
 const About: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
-  const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
+  // const [expandedCompany, setExpandedCompany] = useState<string | null>(null);
 
   const companies = [
     // {
@@ -37,7 +38,7 @@ const About: React.FC = () => {
       description: "Baksh Investment Limited is the financial backbone of our group, specializing in maritime investments, portfolio management, and strategic financial services. We identify and nurture high-potential opportunities in the shipping and logistics sectors.",
       icon: <Briefcase className="w-8 h-8 text-blue-600" />,
       link: "/baksh-investment",
-      year: 2010,
+      year: 2008,
       employees: "200+",
       locations: ["Karachi", "Dubai"],
       values: [
@@ -120,67 +121,98 @@ const About: React.FC = () => {
     }
   ];
 
-  const toggleCompany = (companyId: string) => {
-    setExpandedCompany(expandedCompany === companyId ? null : companyId);
-  };
+  // const toggleCompany = (companyId: string) => {
+  //   setExpandedCompany(expandedCompany === companyId ? null : companyId);
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div 
-        className="relative min-h-[24rem] flex items-start justify-center bg-white py-12 shadow-md"
-      >
-        <div className="container mx-auto px-4 pt-4">
-          <div className="max-w-5xl mx-auto text-center">
-            
-            <motion.h1 
-              className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-800 leading-tight pt-2"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              style={{
-                fontFamily: "'Playfair Display', serif"
-              }}
-            >
-              Pioneering <span className="text-blue-500">Maritime</span>
-              <br />
-              <span className="text-2xl md:text-4xl lg:text-5xl font-light text-gray-700">Excellence Since 1951</span>
-            </motion.h1>
-            
-            <motion.div 
-              className="w-16 h-1 bg-blue-500 mx-auto my-6"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            />
-            
-            <motion.p 
-              className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 300
-              }}
-            >
-              A diversified conglomerate at the forefront of maritime innovation, logistics solutions, and strategic investments, connecting markets with integrity and vision.
-            </motion.p>
-            
-            <motion.div
-              className="flex flex-wrap justify-center gap-4 mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            >
-              <a 
-                href="/contact" 
-                className="px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-all duration-300 flex items-center gap-2 group shadow-lg"
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50" />
+          <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-blue-100 blur-3xl opacity-60" />
+          <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-cyan-100 blur-3xl opacity-60" />
+        </div>
+
+        <div className="relative min-h-[26rem] flex items-center justify-center py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto text-center">
+              {/* <motion.div
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-700 border border-blue-100 mb-5"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                Get in Touch
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </motion.div>
+                <span className="text-xs font-semibold tracking-wider">SINCE 1951</span>
+              </motion.div> */}
+
+              <motion.h1
+                className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight text-gray-900"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Pioneering
+                <span className="mx-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Maritime</span>
+                Excellence
+              </motion.h1>
+
+              <motion.p
+                className="mt-5 text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.25 }}
+              >
+                A diversified group at the forefront of maritime innovation, logistics, and strategic investments —
+                connecting markets with integrity, vision, and unmatched reliability.
+              </motion.p>
+
+              <motion.div
+                className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.35 }}
+              >
+                {/* <Link
+                  to="/services"
+                  className="px-8 py-4 rounded-lg bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 transition-colors duration-300 w-full sm:w-auto"
+                >
+                  Explore Services
+                </Link> */}
+                <Link
+                  to="/contact"
+                  className="px-8 py-4 rounded-lg bg-red text-blue-700 border border-blue-600 font-semibold hover:bg-blue-100 transition-colors duration-300 w-full sm:w-auto flex items-center gap-2"
+                >
+                  Get in Touch
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </motion.div>
+
+              <motion.div
+                className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.45 }}
+              >
+                <div className="rounded-xl bg-white shadow-sm border border-gray-100 py-4">
+                  <div className="text-2xl font-bold text-gray-900">70+</div>
+                  <div className="text-xs text-gray-500">Years of Excellence</div>
+                </div>
+                <div className="rounded-xl bg-white shadow-sm border border-gray-100 py-4">
+                  <div className="text-2xl font-bold text-gray-900">500+</div>
+                  <div className="text-xs text-gray-500">Clients</div>
+                </div>
+                <div className="rounded-xl bg-white shadow-sm border border-gray-100 py-4">
+                  <div className="text-2xl font-bold text-gray-900">Global</div>
+                  <div className="text-xs text-gray-500">Presence</div>
+                </div>
+                <div className="rounded-xl bg-white shadow-sm border border-gray-100 py-4">
+                  <div className="text-2xl font-bold text-gray-900">24/7</div>
+                  <div className="text-xs text-gray-500">Support</div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
@@ -218,7 +250,7 @@ const About: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Group at a Glance</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Group </h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <p className="text-gray-600 mb-6 leading-relaxed">
@@ -233,7 +265,7 @@ const About: React.FC = () => {
                   </p>
                   <div className="grid grid-cols-2 gap-4 mt-8">
                     <div className="bg-gray-800 p-4 rounded-lg">
-                      <div className="text-2xl font-bold text-white">74+</div>
+                      <div className="text-2xl font-bold text-white">70+</div>
                       <div className="text-sm text-gray-300">Years Experience</div>
                     </div>
                     <div className="bg-gray-800 p-4 rounded-lg">
@@ -375,28 +407,75 @@ const About: React.FC = () => {
             </section> */}
 
 {/* Our Mission & Vision */}
-<section className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl p-8 text-white">
-  <div className="max-w-4xl mx-auto">
-    <h2 className="text-3xl font-bold mb-8">Our Mission & Vision</h2>
+<section
+  className="relative py-16 text-white bg-center bg-cover bg-no-repeat"
+  style={{
+    backgroundImage:
+      "url('https://images.unsplash.com/photo-1505839673365-e3971f8d9184?auto=format&fit=crop&w=1600&q=80')",
+  }}
+>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 via-gray-800/85 to-gray-900/35"></div>
+
+  <div className="relative max-w-6xl mx-auto px-6 md:px-8">
+    {/* Header */}
+    <div className="text-center mb-12">
+      <h2 className="text-4xl font-extrabold tracking-tight mb-4 text-white">
+        Our Mission & Vision
+      </h2>
+      <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+        Guiding our journey with innovation, integrity, and impact in every wave we sail.
+      </p>
+    </div>
+
+    {/* Cards */}
     <div className="grid md:grid-cols-2 gap-8">
-      <div className="bg-gray-800/90 p-6 rounded-lg backdrop-blur-sm">
-        <h3 className="text-xl font-semibold mb-3 text-white">Our Mission</h3>
-        <p className="text-gray-200">
-          To deliver exceptional value to our customers through innovative maritime and logistics solutions, 
-          while maintaining the highest standards of safety, efficiency, and environmental responsibility.
+      {/* Mission */}
+      <div className="group relative bg-white/10 hover:bg-white/15 transition-all duration-500 rounded-2xl shadow-2xl p-8 backdrop-blur-lg border border-white/10 hover:-translate-y-1">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="p-3 bg-blue-500/30 rounded-xl group-hover:bg-blue-500/50 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7H7v6h6V7z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 13l10 10 4-4-10-10H7z" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-semibold text-white">Our Mission</h3>
+        </div>
+        <p className="text-white-200 leading-relaxed">
+          To deliver exceptional value to our customers through innovative maritime and logistics
+          solutions, maintaining the highest standards of safety, efficiency, and environmental responsibility.
         </p>
+
+        {/* Accent Line */}
+        <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-tr-2xl transition-all duration-500"></div>
       </div>
-      <div className="bg-gray-800/90 p-6 rounded-lg backdrop-blur-sm">
-        <h3 className="text-xl font-semibold mb-3 text-white">Our Vision</h3>
-        <p className="text-gray-200">
-          To be the most trusted and innovative maritime and logistics group, 
-          setting industry benchmarks and creating sustainable value for all our stakeholders.
+
+      {/* Vision */}
+      <div className="group relative bg-white/10 hover:bg-white/15 transition-all duration-500 rounded-2xl shadow-2xl p-8 backdrop-blur-lg border border-white/10 hover:-translate-y-1">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="p-3 bg-blue-500/30 rounded-xl group-hover:bg-blue-500/50 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-semibold text-white">Our Vision</h3>
+        </div>
+        <p className="text-white-200 leading-relaxed">
+          To be the most trusted and innovative maritime and logistics group, setting industry benchmarks
+          and creating sustainable value for all our stakeholders.
         </p>
+
+        {/* Accent Line */}
+        <div className="absolute bottom-0 left-0 w-0 group-hover:w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-tr-2xl transition-all duration-500"></div>
       </div>
+    </div>
+
+    {/* Decorative underline */}
+    <div className="mt-12 flex justify-center">
+      <div className="h-1 w-40 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full shadow-lg"></div>
     </div>
   </div>
 </section>
-
             {/* Our Values */}
             <section>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Core Values</h2>
@@ -518,7 +597,7 @@ const About: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{company.name} at a Glance</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{company.name} </h2>
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
                         <p className="text-gray-600 mb-6 leading-relaxed">

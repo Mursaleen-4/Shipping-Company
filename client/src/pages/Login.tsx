@@ -7,9 +7,7 @@ import {
   EyeOff,
   ArrowRight,
   Fingerprint,
-  Ship,
-  User,
-  CheckCircle
+  Ship
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -26,19 +24,19 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   // Background placeholder — replace with your real variable or static image
-  const pageBackgrounds = {
-    login: '/images/login-bg.jpg'
-  };
+  // const pageBackgrounds = {
+  //   login: '/images/login-bg.jpg'
+  // };
 
-  // Animation variants
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: 'spring', stiffness: 100 }
-    }
-  };
+  // // Animation variants
+  // const itemVariants = {
+  //   hidden: { y: 20, opacity: 0 },
+  //   visible: {
+  //     y: 0,
+  //     opacity: 1,
+  //     transition: { type: 'spring', stiffness: 100 }
+  //   }
+  // };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -89,17 +87,14 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen flex bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${pageBackgrounds.login})` }}
-    >
+    <div className="min-h-screen flex flex-col lg:flex-row bg-white">
       {/* Left side: form */}
-      <div className="relative z-10 w-full lg:w-1/2 flex items-center justify-center px-6 py-16">
+      <div className="relative z-10 w-full lg:w-1/2 flex items-center justify-center px-6 py-16 bg-gradient-to-br from-blue-50 to-blue-100">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
+          className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl"
         >
           <div className="flex flex-col items-center mb-8">
             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center shadow-lg mb-4">
@@ -108,10 +103,7 @@ const Login: React.FC = () => {
             <h1 className="text-3xl font-bold text-black drop-shadow-md">Welcome Back</h1>
           </div>
 
-          <motion.form
-            onSubmit={handleSubmit}
-            className="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100"
-          >
+          <motion.form onSubmit={handleSubmit}>
             {/* Email */}
             <div className="mb-4">
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -220,33 +212,73 @@ const Login: React.FC = () => {
       </div>
 
       {/* Right side decorative */}
-      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-blue-600 to-indigo-700 flex-col items-center justify-center p-12 text-white">
-        <motion.div
-          className="max-w-md text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+      <div className="hidden lg:flex lg:w-1/2 relative">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
-          <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-8">
-            <Fingerprint className="w-10 h-10 text-white" />
-          </div>
-          <h2 className="text-3xl font-bold mb-4">Secure Access</h2>
-          <p className="text-blue-100 mb-8 leading-relaxed">
-            Your security is our top priority. Sign in with your credentials to access your personalized dashboard securely.
-          </p>
-          <div className="space-y-4">
-            {[
-              { text: 'End-to-end encryption', icon: '🔒' },
-              { text: 'Multi-factor authentication', icon: '🔑' },
-              { text: '24/7 security monitoring', icon: '🛡️' }
-            ].map((item, index) => (
-              <div key={index} className="flex items-center space-x-3">
-                <span className="text-xl">{item.icon}</span>
-                <span className="text-blue-100">{item.text}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 to-blue-800/70"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 w-full flex items-center justify-center p-8">
+          <motion.div
+            className="max-w-md w-full bg-white/5 backdrop-blur-sm rounded-2xl p-10 text-white border border-white/10 shadow-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+          >
+            <div className="w-24 h-24 bg-gradient-to-br from-blue-400/20 to-blue-600/30 backdrop-blur-sm rounded-3xl flex items-center justify-center mx-auto mb-8 border border-white/10 shadow-lg">
+              <Fingerprint className="w-12 h-12 text-white" />
+            </div>
+            
+            <motion.h2 
+              className="text-4xl font-bold mb-6 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              Secure Access
+            </motion.h2>
+            
+            <motion.p 
+              className="text-blue-100/90 text-lg mb-10 leading-relaxed max-w-md mx-auto"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              Your security is our top priority. Sign in with your credentials to access your personalized dashboard securely.
+            </motion.p>
+            
+            <motion.div 
+              className="space-y-5 max-w-xs mx-auto"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              {[
+                { text: 'End-to-end encryption', icon: '🔒' },
+                { text: 'Multi-factor authentication', icon: '🔑' },
+                { text: '24/7 security monitoring', icon: '🛡️' }
+              ].map((item, index) => (
+                <motion.div 
+                  key={index} 
+                  className="flex items-center space-x-3 bg-white/5 px-5 py-3 rounded-xl border border-white/5 hover:bg-white/10 transition-colors duration-300"
+                  whileHover={{ x: 5 }}
+                >
+                  <span className="text-2xl">{item.icon}</span>
+                  <span className="text-blue-50 font-medium">{item.text}</span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

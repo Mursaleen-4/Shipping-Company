@@ -116,10 +116,10 @@ const Quote: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-blue-500"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <motion.div 
@@ -129,7 +129,7 @@ const Quote: React.FC = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Get a <span className="text-blue-300">Quote</span>
+              Get a <span className="text-blue-700">Quote</span>
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
               Request a personalized quote for your shipping and logistics needs. Our experts will provide you with competitive rates and tailored solutions.

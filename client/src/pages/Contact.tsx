@@ -32,7 +32,7 @@ const Contact: React.FC = () => {
       id: 'karachi',
       name: 'Karachi Office (Head Office)',
       address: '10th Floor, Sheikh Sultan Trust Bldg, Beaumont Road, Karachi, Pakistan',
-      phone: '+92-21-35688057-9, 35693004, 6, 7',
+      phone: '+92-21-35688057-59, 35693004, 6, 7',
       fax: '+92-21-35683051, 35687367',
       email: 'info@yslpk.com',
       hours: 'Monday - Saturday: 9:00 AM - 6:00 PM',
@@ -114,8 +114,8 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <section className="relative text-white py-16 overflow-hidden bg-black">
-        <div className="absolute inset-0 bg-black"></div>
+      <section className="relative text-white py-16 overflow-hidden bg-blue">
+        <div className="absolute inset-0 bg-blue-500"></div>
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32" />
         

@@ -274,7 +274,7 @@ const EServiceDetail: FC = (): ReactElement => {
       const foundService = services.find(s => s.id === id);
       if (!foundService) {
         // If service not found, redirect to services page
-        navigate('/eservices');
+        navigate('/services');
         return;
       }
       setService(foundService);
@@ -295,7 +295,7 @@ const EServiceDetail: FC = (): ReactElement => {
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Service Not Found</h1>
           <p className="text-gray-600 mb-6">The requested service could not be found.</p>
-          <Link to="/eservices" className="text-blue-600 hover:underline">
+          <Link to="/services" className="text-blue-600 hover:underline">
             Back to Services
           </Link>
         </div>

@@ -52,7 +52,7 @@ const BakshGroup: React.FC = () => {
       name: "Yaaseen Shipping Lines (PVT) Ltd",
       description: "Specialized in project cargo and heavy-lift operations, offering comprehensive logistics solutions worldwide.",
       icon: Anchor,
-      year: "2010",
+      year: "2008",
       services: ["Project Cargo", "Heavy Lift", "Oversized Cargo"]
     },
     {
@@ -90,7 +90,7 @@ const BakshGroup: React.FC = () => {
       icon: Truck
     },
     {
-      year: '2010',
+      year: '2008',
       title: 'Specialized Services',
       event: 'Formation of Yaaseen Shipping Lines (PVT) Ltd',
       icon: Anchor
@@ -104,14 +104,12 @@ const BakshGroup: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-gray-900 to-black overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-blue-600/20 rounded-full filter blur-3xl -mr-40 -mt-40"></div>
-          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-blue-900/20 rounded-full filter blur-3xl -ml-40 -mb-40"></div>
-          <div className="absolute top-1/2 left-1/2 w-1/2 h-1/2 bg-blue-500/10 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+      <section className="relative min-h-[80vh] flex items-center justify-center bg-white overflow-hidden">
+        {/* Subtle Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-white">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj4KICA8cGF0aCBkPSJNNTAgMjVjMC0xMC0xMC0xNS0yMC0xNXMtMjAgNS0yMCAxNSAxMCAxNSAyMCAxNSAyMC01IDIwLTE1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDU5LDEzMCwyNDYsMC4wNSkiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')]"></div>
         </div>
 
         {/* Content */}
@@ -122,28 +120,28 @@ const BakshGroup: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <span className="inline-block px-4 py-2 bg-blue-600/20 text-blue-300 text-sm font-medium rounded-full mb-6 border border-blue-400/30">
+            {/* <span className="inline-block px-4 py-2 bg-blue-600/20 text-blue-300 text-sm font-medium rounded-full mb-6 border border-blue-400/30">
               Since 1951
-            </span>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Building Global <span className="bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">Connections</span>
+            </span> */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+              Building Global <span className="bg-gradient-to-r from-blue-600 to-blue-800 text-transparent bg-clip-text">Connections</span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-8">
               Seven decades of excellence in shipping, logistics, and investment solutions across 20+ countries
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
-              <motion.a
+              {/* <motion.a
                 href="#our-companies"
                 className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-1"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
                 Explore Our Companies
-              </motion.a>
+              </motion.a> */}
               <motion.a
                 href="/contact"
-                className="px-8 py-4 bg-transparent border-2 border-white/20 hover:border-blue-400 text-white font-medium rounded-lg transition-all duration-300 hover:bg-white/5"
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-md hover:shadow-lg"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -194,10 +192,10 @@ const BakshGroup: React.FC = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div className="bg-black p-6 rounded-lg text-center">
+            <div className="bg-blue-50 p-6 rounded-lg text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">{groupOverview.foundingYear}+</div>
-              <h3 className="text-lg font-semibold text-white">Years of Excellence</h3>
-              <p className="text-gray-300">Since our founding</p>
+              <h3 className="text-lg font-semibold text-gray-800">Years of Excellence</h3>
+              <p className="text-gray-600">Since our founding</p>
             </div>
             <div className="bg-blue-50 p-6 rounded-lg text-center">
               <div className="text-4xl font-bold text-blue-600 mb-2">{groupOverview.employees}</div>
@@ -375,29 +373,41 @@ const BakshGroup: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-blue-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-6">Join Us in Shaping the Future</h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Discover how Baksh Group can be your trusted partner in global trade and logistics.
+      {/* CTA Section
+      <section className="relative py-24 bg-gradient-to-br from-blue-700 to-blue-900 text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj4KICA8cGF0aCBkPSJNNTAgMjVjMC0xMC0xMC0xNS0yMC0xNXMtMjAgNS0yMCAxNSAxMCAxNSAyMCAxNSAyMC01IDIwLTE1WiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')]"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="inline-block px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-blue-100 mb-6 border border-white/20">
+            Let's Work Together
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight max-w-4xl mx-auto">
+            Powering <span className="bg-gradient-to-r from-blue-300 to-blue-100 text-transparent bg-clip-text">Global Trade</span> with Seven Decades of Excellence
+          </h2>
+          <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Partner with Baksh Group and leverage our extensive network, industry expertise, and innovative solutions to navigate the complexities of international shipping and logistics.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <motion.a
               href="/contact"
-              className="px-8 py-3 bg-white text-blue-700 font-medium rounded-lg hover:bg-gray-100 transition-colors duration-300"
+              className="px-8 py-4 bg-white text-blue-700 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
               Contact Us
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="/about"
-              className="px-8 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white/10 transition-colors duration-300"
+              className="px-8 py-4 border-2 border-white text-white font-medium rounded-lg hover:bg-white/10 transition-colors duration-300 flex items-center justify-center gap-2"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
             >
               Learn More
-            </a>
+            </motion.a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

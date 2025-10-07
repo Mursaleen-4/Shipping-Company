@@ -12,12 +12,12 @@ import {
   Globe,
   Anchor
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
+// import { pageBackgrounds } from '../assets/videos';
 
 const Gallery: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm] = useState('');
 
   const categories = [
     { id: 'all', name: 'All', icon: <Globe className="w-4 h-4" /> },
@@ -145,10 +145,10 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black"></div>
+        <div className="absolute inset-0 bg-white"></div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <motion.div 

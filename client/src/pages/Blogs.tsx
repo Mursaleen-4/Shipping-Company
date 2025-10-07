@@ -6,18 +6,17 @@ import {
   User, 
   ArrowRight,
   Clock,
-  ChevronDown,
   Globe,
   Ship,
   TrendingUp,
   Award
 } from 'lucide-react';
-import { pageBackgrounds } from '../assets/videos';
+// import { pageBackgrounds } from '../assets/videos';
 
 const Blogs: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortBy, setSortBy] = useState('latest');
+  const [sortBy] = useState('latest');
 
   const categories = [
     { id: 'all', name: 'All News', icon: <Globe className="w-4 h-4" /> },
@@ -139,7 +138,7 @@ const Blogs: React.FC = () => {
   const regularPosts = sortedPosts.filter(post => !post.featured);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-white">
 {/* Page Title */}
 <section className="text-center py-12">
   <motion.h1
@@ -350,7 +349,7 @@ const Blogs: React.FC = () => {
         </div>
       </section>
 
-      {/* Newsletter Signup */}
+      {/* Newsletter Signup
       <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -381,7 +380,7 @@ const Blogs: React.FC = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

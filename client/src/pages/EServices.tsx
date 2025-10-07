@@ -1,23 +1,14 @@
 import React, { useState, ChangeEvent, FC, ReactElement } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion} from 'framer-motion';
 import {
-  Newspaper,
   Container,
-  FileText,
-  Calendar,
   Search,
-  Calculator,
   ArrowRight,
   Ship,
   Truck,
-  Package,
   Anchor,
-  Box,
-  Globe,
   Warehouse,
   ClipboardCheck,
-  BarChart2,
-  ShieldCheck
 } from "lucide-react";
 
 import { Link } from 'react-router-dom';
@@ -76,78 +67,78 @@ const services: IService[] = [
     category: 'main'
   },
   
-  // E-Services
-  {
-    id: "7",
-    title: "Cargo Tracking",
-    icon: Package,
-    description: "Real-time tracking of your shipments and containers.",
-    category: 'e-service'
-  },
-  {
-    id: "8",
-    title: "Vessel Schedules",
-    icon: Calendar,
-    description: "Up-to-date vessel schedules and port calls.",
-    category: 'e-service'
-  },
-  {
-    id: "9",
-    title: "Document Management",
-    icon: FileText,
-    description: "Upload, store and manage all your shipping documents.",
-    category: 'e-service'
-  },
-  {
-    id: "10",
-    title: "Shipping News",
-    icon: Newspaper,
-    description: "Latest news and updates in the shipping industry.",
-    category: 'e-service'
-  },
-  {
-    id: "11",
-    title: "Freight Calculator",
-    icon: Calculator,
-    description: "Calculate estimated freight costs for your shipments.",
-    category: 'e-service'
-  },
-  {
-    id: "12",
-    title: "Container Management",
-    icon: Container,
-    description: "Track and manage your containers with our advanced system.",
-    category: 'e-service'
-  },
-  {
-    id: "13",
-    title: "Market Insights",
-    icon: BarChart2,
-    description: "Access to shipping market trends and analysis.",
-    category: 'e-service'
-  },
-  {
-    id: "14",
-    title: "Compliance & Security",
-    icon: ShieldCheck,
-    description: "Ensure your shipments meet all regulatory requirements.",
-    category: 'e-service'
-  },
-  {
-    id: "15",
-    title: "Industry News",
-    icon: Newspaper,
-    description: "Stay informed with the latest updates and insights from the shipping industry.",
-    category: 'e-service'
-  },
-  {
-    id: "16",
-    title: "Container Management",
-    icon: Container,
-    description: "Track and manage your containers with our advanced system.",
-    category: 'e-service'
-  }
-];
+//   // E-Services
+//   {
+//     id: "7",
+//     title: "Cargo Tracking",
+//     icon: Package,
+//     description: "Real-time tracking of your shipments and containers.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "8",
+//     title: "Vessel Schedules",
+//     icon: Calendar,
+//     description: "Up-to-date vessel schedules and port calls.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "9",
+//     title: "Document Management",
+//     icon: FileText,
+//     description: "Upload, store and manage all your shipping documents.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "10",
+//     title: "Shipping News",
+//     icon: Newspaper,
+//     description: "Latest news and updates in the shipping industry.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "11",
+//     title: "Freight Calculator",
+//     icon: Calculator,
+//     description: "Calculate estimated freight costs for your shipments.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "12",
+//     title: "Container Management",
+//     icon: Container,
+//     description: "Track and manage your containers with our advanced system.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "13",
+//     title: "Market Insights",
+//     icon: BarChart2,
+//     description: "Access to shipping market trends and analysis.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "14",
+//     title: "Compliance & Security",
+//     icon: ShieldCheck,
+//     description: "Ensure your shipments meet all regulatory requirements.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "15",
+//     title: "Industry News",
+//     icon: Newspaper,
+//     description: "Stay informed with the latest updates and insights from the shipping industry.",
+//     category: 'e-service'
+//   },
+//   {
+//     id: "16",
+//     title: "Container Management",
+//     icon: Container,
+//     description: "Track and manage your containers with our advanced system.",
+//     category: 'e-service'
+//   }
+ ];
 
 const EServices: FC = (): ReactElement => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -166,18 +157,18 @@ const EServices: FC = (): ReactElement => {
     setFilteredServices(filtered);
   };
 
-  const filterByCategory = (category: 'all' | 'main' | 'e-service') => {
-    setActiveTab(category);
-    if (category === 'all') {
-      setFilteredServices(services);
-    } else {
-      const filtered = services.filter(service => service.category === category);
-      setFilteredServices(filtered);
-    }
-  };
+  // const filterByCategory = (category: 'all' | 'main' | 'e-service') => {
+  //   setActiveTab(category);
+  //   if (category === 'all') {
+  //     setFilteredServices(services);
+  //   } else {
+  //     const filtered = services.filter(service => service.category === category);
+  //     setFilteredServices(filtered);
+  //   }
+  // };
 
-  const mainServices = services.filter(service => service.category === 'main');
-  const eServices = services.filter(service => service.category === 'e-service');
+  // const mainServices = services.filter(service => service.category === 'main');
+  // const eServices = services.filter(service => service.category === 'e-service');
 
   const renderServiceCard = (service: IService, index: number) => (
     <motion.div
@@ -188,7 +179,7 @@ const EServices: FC = (): ReactElement => {
       whileHover={{ y: -5 }}
       className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100"
     >
-      <Link to={`/eservices/${service.id}`} className="block h-full">
+      <Link to={`/services/${service.id}`} className="block h-full">
         <div className="p-6 h-full flex flex-col">
           <div className="flex items-center mb-4">
             <div className={`p-3 rounded-lg ${

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   Ship, 
   MapPin, 
@@ -41,17 +42,17 @@ const Footer: React.FC = () => {
     { name: 'Contact Us', href: '/contact' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Blogs', href: '/blogs' },
-    { name: 'Tarrifs', href: '/Tarrifs' },
-    { name: 'Vessel Schedule', href: '/Schedule' }
+    { name: 'Tariffs', href: '/tariffs' },
+    { name: 'Vessel Schedule', href: '/schedule' }
   ];
 
   const services = [
-    { name: 'Liner Shipping', href: '/services/liner-shipping', icon: Ship },
-    { name: 'Ocean Freight', href: '/services/ocean-freight', icon: Container },
-    { name: 'Freight Forwarding', href: '/services/freight-forwarding', icon: Globe },
-    { name: 'Ship Husbandry', href: '/services/ship-husbandry', icon: Anchor },
-    { name: 'Container Services', href: '/services/container-services', icon: Container },
-    { name: 'Project Cargo', href: '/services/project-cargo', icon: FileText }
+    { name: 'Liner Shipping', href: '/services/1', icon: Ship },
+    { name: 'Freight Forwarding', href: '/services/2', icon: Globe },
+    { name: 'Container Services', href: '/services/3', icon: Container },
+    { name: 'Ship Husbandry', href: '/services/4', icon: Anchor },
+    { name: 'WareHousing', href: '/services/5', icon: FileText },
+    { name: 'Customs Clearance', href: '/services/6', icon: FileText }
   ];
 
   // const eServices = [
@@ -75,13 +76,13 @@ const Footer: React.FC = () => {
   const offices = [
     {
       city: 'Karachi',
-      address: 'Sheikh Sultan Trust Bldg, Beaumont Road',
-      phone: '+92-21-35688057',
+      address: '10th Floor, Sheikh Sultan Trust Bldg, Beaumont Road',
+      phone: '+92-21-35688057-59',
       email: 'info@yslpk.com'
     },
     {
       city: 'Lahore',
-      address: 'Grand Square Mall, Gulberg III',
+      address: 'Grand Square Mall, Office no E9C/2, 9th Floor, Gulberg III',
       phone: '+92-42-35764134',
       email: 'lahore@yslpk.com'
     },
@@ -158,8 +159,8 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="flex items-center text-gray-300">
                   <Phone className="w-4 h-4 mr-3 text-primary-400" />
-                  <a href="tel:+922135688057" className="text-sm hover:text-primary-400 transition-colors">
-                    +92-21-35688057
+                  <a href="tel:+922135688057-59" className="text-sm hover:text-primary-400 transition-colors">
+                    +92-21-35688057-59
                   </a>
                 </div>
                 <div className="flex items-center text-gray-300">
@@ -184,13 +185,13 @@ const Footer: React.FC = () => {
                 <ul className="space-y-3">
                   {quickLinks.map((link) => (
                     <li key={link.name}>
-                      <a
-                        href={link.href}
+                      <Link
+                        to={link.href}
                         className="flex items-center text-gray-300 hover:text-primary-400 transition-colors group"
                       >
                         <ChevronRight className="w-4 h-4 mr-2 transform group-hover:translate-x-1 transition-transform" />
                         {link.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -219,13 +220,13 @@ const Footer: React.FC = () => {
                     const Icon = service.icon;
                     return (
                       <li key={service.name}>
-                        <a
-                          href={service.href}
+                        <Link
+                          to={service.href}
                           className="flex items-center text-gray-300 hover:text-primary-400 transition-colors group"
                         >
                           <Icon className="w-4 h-4 mr-3 text-primary-400" />
                           {service.name}
-                        </a>
+                        </Link>
                       </li>
                     );
                   })}

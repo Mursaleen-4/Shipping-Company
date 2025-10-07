@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Ship, 
@@ -8,11 +9,6 @@ import {
   Globe, 
   Package,
   Wrench,
-  MapPin,
-  Clock,
-  Users,
-  Shield,
-  ArrowRight,
   CheckCircle,
   ChevronRight
 } from 'lucide-react';
@@ -326,11 +322,11 @@ const ServicesShowcase: React.FC = () => {
                       </div>
 
                       
-                      {/* Learn More Button */}
-                      <button className="text-primary-600 font-semibold text-sm hover:text-primary-700 transition-colors flex items-center group">
+                      {/* Learn More Link */}
+                      <Link to="/services" className="text-primary-600 font-semibold text-sm hover:text-primary-700 transition-colors flex items-center group">
                         Learn More
                         <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>

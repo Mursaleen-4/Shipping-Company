@@ -1,12 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Ship, Users, Award, TrendingUp, MapPin, Phone, Mail } from 'lucide-react';
+import { Ship, Users, Award, TrendingUp, Phone, Mail, MapPin } from 'lucide-react';
 import HeroCarousel from '../components/HeroCarousel';
 import Testimonials from '../components/Testimonials';
 import SocialMedia from '../components/SocialMedia';
-import { pageBackgrounds } from '../assets/videos';
-
+// import { pageBackgrounds } from '../assets/videos';
 const Home: React.FC = () => {
   const stats = [
     {
@@ -41,28 +40,28 @@ const Home: React.FC = () => {
       title: 'Liner Shipping',
       description: 'Regular scheduled services with OOCL partnership',
       color: 'from-blue-500 to-blue-600',
-      link: '/eservices/1'
+      link: '/services/1'
     },
     {
       id: '2',
       title: 'Freight Forwarding',
       description: 'Complete logistics solutions and documentation',
       color: 'from-green-500 to-green-600',
-      link: '/eservices/2'
+      link: '/services/2'
     },
     {
       id: '3',
       title: 'Container Services',
       description: 'FCL/LCL services with empty container depots',
       color: 'from-purple-500 to-purple-600',
-      link: '/eservices/3'
+      link: '/services/3'
     },
     {
       id: '4',
       title: 'Ship Husbandry',
       description: 'Vessel handling and port coordination services',
       color: 'from-orange-500 to-orange-600',
-      link: '/eservices/4'
+      link: '/services/4'
     }
   ];
 
@@ -164,7 +163,107 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      
+            {/* Contact CTA - Clean Split Layout */}
+            <section className="relative">
+              <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+                {/* Left side - Light blue background with content */}
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 flex items-center p-12 lg:p-16 xl:p-20">
+                  <div className="max-w-2xl mx-auto">
+                    <div className="mb-8">
+                      <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold mb-4">
+                        Get in Touch
+                      </span>
+                      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Let's work <span className="text-blue-600">together</span> on your next project
+                      </h2>
+                      <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+                        We're here to help you navigate the complexities of global shipping and logistics. 
+                        Our team of experts is ready to provide personalized solutions for your business needs.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-6 mb-10">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="bg-blue-100 p-3 rounded-full">
+                            <Phone className="w-6 h-6 text-blue-600" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">Call Us</h3>
+                          <p className="text-blue-600 hover:text-blue-700">+92 21 3241 4848</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="bg-blue-100 p-3 rounded-full">
+                            <Mail className="w-6 h-6 text-blue-600" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">Email Us</h3>
+                          <p className="text-blue-600 hover:text-blue-700">info@yslpk.com</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="bg-blue-100 p-3 rounded-full">
+                            <MapPin className="w-6 h-6 text-blue-600" />
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">Visit Us</h3>
+                          <p className="text-gray-700">
+                            10th Floor, Sheikh Sultan Trust Bldg,<br />
+                            Beaumont Road, Karachi, Pakistan
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <motion.div 
+                        whileHover={{ y: -3, boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)' }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full sm:w-auto"
+                      >
+                        <Link 
+                          to="/contact" 
+                          className="w-full flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:-translate-y-1"
+                        >
+                          <span>Get Started</span>
+                          <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                        </Link>
+                      </motion.div>
+                      <motion.div 
+                        whileHover={{ y: -3 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full sm:w-auto"
+                      >
+                        <Link 
+                          to="/about" 
+                          className="w-full flex items-center justify-center px-8 py-4 bg-white border-2 border-blue-100 hover:border-blue-200 text-blue-600 hover:text-blue-700 font-semibold rounded-lg transition-all duration-300 transform hover:-translate-y-1"
+                        >
+                          <span>Learn More</span>
+                        </Link>
+                      </motion.div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Right side - Image only */}
+                <div className="relative min-h-[400px] lg:min-h-full">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: 'url(/images/group.jpg)' }}
+                  />
+                </div>
+              </div>
+            </section>
       
       {/* Testimonials */}
       <Testimonials />
@@ -172,68 +271,7 @@ const Home: React.FC = () => {
       {/* Social Media */}
       <SocialMedia />
       
-      {/* Contact CTA */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-blue-800 rounded-3xl p-8 lg:p-16 text-white relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full -ml-32 -mb-32" />
-            
-            <div className="relative z-10">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-                    Start Your Maritime Journey Today
-                  </h2>
-                  <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                    Ready to experience world-class maritime services? Contact our experts for personalized shipping solutions.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Link to="/contact" className="btn bg-white text-primary-600 hover:bg-gray-100 btn-lg px-8 py-4 font-bold">
-                        Get In Touch
-                      </Link>
-                    </motion.div>
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Link to="/about" className="btn border-2 border-white text-white hover:bg-white hover:text-primary-600 btn-lg px-8 py-4 font-bold">
-                        Learn More
-                      </Link>
-                    </motion.div>
-                  </div>
-                </div>
-                
-                <div className="space-y-6">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                    <div className="flex items-center mb-4">
-                      <MapPin className="w-6 h-6 text-yellow-400 mr-3" />
-                      <span className="font-semibold">Head Office</span>
-                    </div>
-                    <p className="text-blue-100">
-                      10th Floor, Sheikh Sultan Trust Bldg,<br />
-                      Beaumont Road, Karachi, Pakistan
-                    </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                      <Phone className="w-5 h-5 text-yellow-400 mb-2" />
-                      <div className="text-sm text-blue-100">
-                        +92-21-35688057
-                      </div>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-                      <Mail className="w-5 h-5 text-yellow-400 mb-2" />
-                      <div className="text-sm text-blue-100">
-                        info@yslpk.com
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 };
