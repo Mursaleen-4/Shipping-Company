@@ -3,16 +3,10 @@ import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 // In client/src/pages/About.tsx
 import {
-  Briefcase,
-  BarChart2,
   Users,
   Award,
-  Ship,
   Globe,
-  Clock,
   Shield,
-  Anchor,
-  Truck,
   Target,
   ArrowRight,
   Calendar,
@@ -41,33 +35,33 @@ const About: React.FC = () => {
   const companies = [
     {
       id: "baksh-investment",
-      name: "Baksh Investment Limited",
-      shortDescription:
-        "Strategic investment and financial services company driving growth in the maritime sector.",
+      name: "Baksh Shipping Lines",
+      // shortDescription:
+      //   "Strategic investment and financial services company driving growth in the maritime sector.",
       description:
-        "Baksh Investment Ltd. was established in 1967 as part of the Group’s strategic initiative to expand and diversify its business operations. Our flexible service offerings include charter services",
-      icon: <Briefcase className="w-8 h-8 text-blue-600" />,
-      link: "/baksh-investment",
-      year: 2008,
-      employees: "200+",
-      locations: ["Karachi", "Dubai"],
-      values: [
-        {
-          icon: <BarChart2 className="w-5 h-5" />,
-          title: "Excellence",
-          description: "Superior performance",
-        },
-        {
-          icon: <Users className="w-5 h-5" />,
-          title: "Client Focus",
-          description: "Tailored solutions",
-        },
-        {
-          icon: <Award className="w-5 h-5" />,
-          title: "Integrity",
-          description: "Trust and transparency",
-        },
-      ],
+        "Baksh Shipping Lines was established in 1967 as part of the Group’s strategic initiative to expand and diversify its business operations. Our flexible service offerings include charter services",
+      // icon: <Briefcase className="w-8 h-8 text-blue-600" />,
+      // link: "/baksh-shipping",
+      // year: 2008,
+      // employees: "200+",
+      // locations: ["Karachi", "Dubai"],
+      // values: [
+      //   {
+      //     icon: <BarChart2 className="w-5 h-5" />,
+      //     title: "Excellence",
+      //     description: "Superior performance",
+      //   },
+      //   {
+      //     icon: <Users className="w-5 h-5" />,
+      //     title: "Client Focus",
+      //     description: "Tailored solutions",
+      //   },
+      //   {
+      //     icon: <Award className="w-5 h-5" />,
+      //     title: "Integrity",
+      //     description: "Trust and transparency",
+      //   },
+      // ],
       // stats: [
       //   { value: "$500M+", label: "Assets Under Management" },
       //   { value: "50+", label: "Investment Projects" },
@@ -78,38 +72,38 @@ const About: React.FC = () => {
     {
       id: "yaaseen-shipping",
       name: "Yaaseen Shipping Lines",
-      shortDescription:
-        "Leading maritime services provider with global reach and excellence in shipping solutions.",
+      // shortDescription:
+      //   "Leading maritime services provider with global reach and excellence in shipping solutions.",
       description:
         "Following the joint venture with OOCL in 2007, Yaaseen Shipping Lines was appointed as the exclusive booking agent for OOCL Pakistan in Lahore, Multan, and Faisalabad. ",
-      icon: <Ship className="w-8 h-8 text-blue-600" />,
-      link: "/yaaseen-about",
-      year: 2012,
-      employees: "500+",
-      locations: ["Karachi", "Dubai", "Singapore", "Istanbul"],
-      values: [
-        {
-          icon: <Globe className="w-5 h-5" />,
-          title: "Global Reach",
-          description: "Worldwide network",
-        },
-        {
-          icon: <Clock className="w-5 h-5" />,
-          title: "Reliability",
-          description: "On-time delivery",
-        },
-        {
-          icon: <Shield className="w-5 h-5" />,
-          title: "Safety",
-          description: "Highest standards",
-        },
-      ],
-      stats: [
-        { value: "50+", label: "Vessels" },
-        { value: "100+", label: "Global Ports" },
-        { value: "1M+", label: "TEUs Annually" },
-        { value: "99.8%", label: "On-time Delivery" },
-      ],
+      // icon: <Ship className="w-8 h-8 text-blue-600" />,
+      // link: "/yaaseen-about",
+      // year: 2012,
+      // employees: "500+",
+      // locations: ["Karachi", "Dubai", "Singapore", "Istanbul"],
+      // values: [
+      //   {
+      //     icon: <Globe className="w-5 h-5" />,
+      //     title: "Global Reach",
+      //     description: "Worldwide network",
+      //   },
+      //   {
+      //     icon: <Clock className="w-5 h-5" />,
+      //     title: "Reliability",
+      //     description: "On-time delivery",
+      //   },
+      //   {
+      //     icon: <Shield className="w-5 h-5" />,
+      //     title: "Safety",
+      //     description: "Highest standards",
+      //   },
+      // ],
+      // stats: [
+      //   { value: "50+", label: "Vessels" },
+      //   { value: "100+", label: "Global Ports" },
+      //   { value: "1M+", label: "TEUs Annually" },
+      //   { value: "99.8%", label: "On-time Delivery" },
+      // ],
     },
     {
       id: "yaaseen-pvt",
@@ -118,64 +112,94 @@ const About: React.FC = () => {
         "Specialized cargo solutions and vessel operations with a focus on efficiency and reliability.",
       description:
         "Yaaseen Shipping (PVT) Ltd specializes in providing comprehensive shipping and logistics solutions tailored to meet the specific needs of our clients. Our expertise includes container shipping, break bulk, special equipment equipment for sensitive or oversized shipments, and project cargo handling.",
-      icon: <Anchor className="w-8 h-8 text-blue-600" />,
-      link: "/yaaseen-shipping-pvt",
-      year: 2015,
-      employees: "300+",
-      locations: ["Karachi", "Lahore", "Istanbul"],
-      values: [
-        {
-          icon: <Users className="w-5 h-5" />,
-          title: "Customer First",
-          description: "Client satisfaction",
-        },
-        {
-          icon: <Clock className="w-5 h-5" />,
-          title: "Efficiency",
-          description: "Optimal solutions",
-        },
-        {
-          icon: <Shield className="w-5 h-5" />,
-          title: "Reliability",
-          description: "Consistent service",
-        },
-      ],
-      stats: [
-        { value: "30+", label: "Vessels" },
-        { value: "50+", label: "Global Routes" },
-        { value: "500K+", label: "TEUs Handled" },
-        { value: "24/7", label: "Support" },
-      ],
+      // icon: <Anchor className="w-8 h-8 text-blue-600" />,
+      // link: "/yaaseen-shipping-pvt",
+      // year: 2015,
+      // employees: "300+",
+      // locations: ["Karachi", "Lahore", "Istanbul"],
+      // values: [
+      //   {
+      //     icon: <Users className="w-5 h-5" />,
+      //     title: "Customer First",
+      //     description: "Client satisfaction",
+      //   },
+      //   {
+      //     icon: <Clock className="w-5 h-5" />,
+      //     title: "Efficiency",
+      //     description: "Optimal solutions",
+      //   },
+      //   {
+      //     icon: <Shield className="w-5 h-5" />,
+      //     title: "Reliability",
+      //     description: "Consistent service",
+      //   },
+      // ],
+      // stats: [
+      //   { value: "30+", label: "Vessels" },
+      //   { value: "50+", label: "Global Routes" },
+      //   { value: "500K+", label: "TEUs Handled" },
+      //   { value: "24/7", label: "Support" },
+      // ],
     },
     {
       id: "uosl",
       name: "UOSL Shipping & Logistics (Pvt) Ltd",
-      shortDescription:
-        "End-to-end logistics solutions with a focus on efficiency and customer satisfaction.",
+      // shortDescription:
+      //   "End-to-end logistics solutions with a focus on efficiency and customer satisfaction.",
       description:
         "UOSL Shipping and Logicsctics (Pvt) Ltd , is a part of BAKSH group of companies, UOSL has established Off Dock Empty Container Park located at Karachi within city limit at well known location for customers at Maripur Truck Stand Hawks bay Road Karachi and around 6-7 km from Karachi Port, having a storage area of 8 acres land on which storage / operation commenced from 11th-April-2008 with back up area of another 4 acres for expansion on 2nd phase, depot having boundary wall.",
-      icon: <Truck className="w-8 h-8 text-blue-600" />,
-      link: "/uosl",
-      year: 2018,
-      employees: "400+",
-      locations: ["Karachi", "Lahore", "Islamabad", "Dubai"],
-      values: [
-        {
-          icon: <Target className="w-5 h-5" />,
-          title: "Innovation",
-          description: "Advanced solutions",
-        },
-        {
-          icon: <Users className="w-5 h-5" />,
-          title: "Partnership",
-          description: "Collaborative approach",
-        },
-        {
-          icon: <BarChart2 className="w-5 h-5" />,
-          title: "Efficiency",
-          description: "Streamlined operations",
-        },
-      ],
+      // icon: <Truck className="w-8 h-8 text-blue-600" />,
+      // link: "/uosl",
+      // year: 2018,
+      // employees: "400+",
+      // locations: ["Karachi", "Lahore", "Islamabad", "Dubai"],
+      // values: [
+      //   {
+      //     icon: <Target className="w-5 h-5" />,
+      //     title: "Innovation",
+      //     description: "Advanced solutions",
+      //   },
+      //   {
+      //     icon: <Users className="w-5 h-5" />,
+      //     title: "Partnership",
+      //     description: "Collaborative approach",
+      //   },
+      //   {
+      //     icon: <BarChart2 className="w-5 h-5" />,
+      //     title: "Efficiency",
+      //     description: "Streamlined operations",
+      //   },
+      // ],
+    },
+    {
+      id: "zoom",
+      name: "Zoom World Pvt Ltd",
+      // shortDescription:
+      //   "End-to-end logistics solutions with a focus on efficiency and customer satisfaction.",
+      description:
+        "Zoom World Pvt Ltd was established in 2019 to provide comprehensive logistics solutions. Backed by the Baksh Group’s industry experience and strong market presence, Zoom World was formed to support Pakistan’s growing trade requirements.",
+      // icon: <Truck className="w-8 h-8 text-blue-600" />,
+      // link: "/zoom",
+      // year: 2018,
+      // employees: "400+",
+      // locations: ["Karachi", "Lahore", "Islamabad", "Dubai"],
+      // values: [
+      //   {
+      //     icon: <Target className="w-5 h-5" />,
+      //     title: "Innovation",
+      //     description: "Advanced solutions",
+      //   },
+      //   {
+      //     icon: <Users className="w-5 h-5" />,
+      //     title: "Partnership",
+      //     description: "Collaborative approach",
+      //   },
+      //   {
+      //     icon: <BarChart2 className="w-5 h-5" />,
+      //     title: "Efficiency",
+      //     description: "Streamlined operations",
+      //   },
+      // ],
     },
   ];
   const milestones = [
@@ -187,7 +211,7 @@ const About: React.FC = () => {
     {
       year: 1967,
       event:
-        "Baksh Investment Limited incorporated, expanding into stevedoring, terminal handling, and lighterage operations",
+        "Baksh Shipping Lines incorporated, expanding into stevedoring, terminal handling, and lighterage operations",
     },
     {
       year: 1981,
@@ -352,16 +376,17 @@ const About: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              {/* Logo */}
+             <div className="flex items-center gap-1 mb-1">
+               <img
+                 src="/images/baksh.png"
+                 alt="Baksh Group Logo"
+                 className="h-24 w-24 object-contain"
+               />
 
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Our Group{" "}
-              </h2>
-              <img
-                src="/images/baksh1.png"
-                alt="Baksh Group Logo"
-                className="h-12 w-auto mr-2"
-              />
+               <h2 className="text-3xl font-bold text-gray-900 leading-none">
+                 Our Group
+               </h2>
+              </div>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <p className="text-gray-600 mb-6 leading-relaxed">
@@ -654,7 +679,7 @@ established in Karachi and Lahore Port, serving key clients.
                         {company.id === "baksh-investment" && (
                           <img
                             src="/images/bakhs_limited.jpg"
-                            alt="Baksh Investment Limited Logo"
+                            alt="Baksh Shipping Lines Logo"
                             className="h-12 w-auto mr-4"
                           />
                         )}
@@ -691,16 +716,20 @@ established in Karachi and Lahore Port, serving key clients.
                               "Our team of logistics experts works closely with clients to develop customized solutions that optimize supply chain performance and reduce operational costs while maintaining the highest standards of service."}
                             {company.id === "uosl" &&
                               "In 2011, UOSL expanded its operations by establishing an Empty Container Terminal on Multan Road, Lahore, a well-known location for all customers. The terminal is ideally positioned near dry ports and key industrial areas. The Lahore facility covers 3 acres, with another 4 acres reserved for future expansion (Phase II)."}
+                            {company.id === "zoom" &&
+                            "The company works closely with all major exporters and importers of Pakistan, delivering reliable and customized logistics solutions across multiple industries. It focuses on efficient, cost-effective, and timely cargo movement for domestic and regional clients."}
                           </p>
                           <p className="text-gray-600 mb-6 leading-relaxed">
                             {company.id === "baksh-investment" &&
-                              "In 1978, Baksh Investment Limited resumed operations, initiating services in stevedoring, terminal handling, and lighterage operations. The company quickly established itself as a trusted contractor for major national organizations, including the Pakistan National Shipping Corporation (PNSC), Rice Export Corporation of Pakistan, and the Trading Corporation of Pakistan."}
+                              "In 1978, Baksh Shipping Lines resumed operations, initiating services in stevedoring, terminal handling, and lighterage operations. The company quickly established itself as a trusted contractor for major national organizations, including the Pakistan National Shipping Corporation (PNSC), Rice Export Corporation of Pakistan, and the Trading Corporation of Pakistan."}
                             {company.id === "yaaseen-shipping" &&
                               "By combining deep industry knowledge with local market expertise, Yaaseen Shipping Lines continues to achieve consistent growth in volume and revenue, particularly through light cargo bookings and specialized logistics arrangements.  Its operational excellence is reinforced by reliable documentation, prompt communication, and close coordination with OOCL offices and customers. With a customer-centric approach, Yaaseen Shipping Lines focuses on nurturing long-term partnerships while actively expanding its clientele through superior service delivery, timely responses, and value-driven logistics solutions. "}
                             {company.id === "yaaseen-pvt" &&
                               "Established in 1981, Yaaseen Shipping Pvt Ltd began operations to represent international shipping principals in Pakistan. In 1984, the company was appointed as the exclusive agent for Orient Overseas Container Line (OOCL) and demonstrated outstanding performance throughout the years, earning a strong reputation within the industry. Building on this success, in 2006, YSL was further entrusted with agency representation for STX Pan Ocean Co Ltd (now Pan Ocean)."}
                             {company.id === "uosl" &&
                               "UOSL’s Empty Container Parks are fully equipped with all essential commercial infrastructure, including experienced and professional personnel, automated and computerized operations, and timely electronic reporting/documentation (EDI). Our competent office and field teams ensure operational efficiency and accuracy across all processes."}
+                            {company.id === "zoom" &&
+                            "Zoom World is supported by a highly skilled and efficient sales and operations team capable of handling all types of cargo, including perishable goods, dangerous goods (DG), oversized, and bulk shipments. The team ensures compliance with international regulations while maintaining the highest standards of safety and service quality."}
                           </p>
                           <p className="text-gray-600 mb-6 leading-relaxed">
                             {company.id === "baksh-investment" &&
@@ -711,10 +740,12 @@ established in Karachi and Lahore Port, serving key clients.
                               "In 2007, the company was appointed as the exclusive agent for Maldives National Shipping and, in the same year, entered into a joint venture agreement with OOCL in line with OOCL’s global JV policy. This milestone strengthened YSL’s position as a key player in Pakistan’s shipping and logistics industry, enhancing its operational capacity and service network."}
                             {company.id === "uosl" &&
                               "We maintain our clients’ trust and satisfaction through 24/7 on-site security, a dedicated backup power supply, and dual-gate access (In/Out) to ensure smooth traffic flow and faster truck turnaround. The depot also offers ample vehicle parking space for transporters."}
+                            {company.id === "zoom" &&
+                            "Zoom World is supported by a highly skilled and efficient sales and operations team capable of handling all types of cargo, including perishable goods, dangerous goods (DG), oversized, and bulk shipments. The team ensures compliance with international regulations while maintaining the highest standards of safety and service quality."}
                           </p>
                           <p className="text-gray-600 mb-6 leading-relaxed">
-                            {company.id === "baksh-investment" &&
-                              "Baksh Investment Ltd maintains strong relationships with port authorities, customs departments, and other key stakeholders, ensuring smooth, efficient, and compliant vessel operations."}
+                            {company.id === "baksh-shipping" &&
+                              "Baksh Shipping Lines maintains strong relationships with port authorities, customs departments, and other key stakeholders, ensuring smooth, efficient, and compliant vessel operations."}
                             {company.id === "yaaseen-pvt" && (
                               <>
                                 Over the years, Yaaseen Shipping Pvt Ltd has
@@ -735,16 +766,18 @@ established in Karachi and Lahore Port, serving key clients.
                             )}
                           </p>
                           <p className="text-gray-600 mb-6 leading-relaxed">
-                            {company.id === "baksh-investment" &&
-                              "In chartering, the company provides end-to-end solutions, covering vessel chartering, voyage coordination, and cargo movement for both import and export sectors. Baksh Investment Ltd has successfully arranged vessel charters for dry bulk, breakbulk, and project cargoes, maintaining strong relationships with regional and international shipowners, charterers, and brokers."}
+                            {company.id === "baksh-shipping" &&
+                              "In chartering, the company provides end-to-end solutions, covering vessel chartering, voyage coordination, and cargo movement for both import and export sectors. Baksh Shipping Lines has successfully arranged vessel charters for dry bulk, breakbulk, and project cargoes, maintaining strong relationships with regional and international shipowners, charterers, and brokers."}
                             {company.id === "yaaseen-pvt" &&
                               "Through these strategic alliances, YSL has built a robust presence in both regional and global markets, offering reliable maritime and logistics solutions across a wide range of trade routes. The company’s dedicated team of professionals ensures that each client receives personalized service, timely communication, and efficient cargo handling, reinforcing YSL’s standing as a trusted and performance-driven shipping agency in Pakistan."}
                             {company.id === "uosl" &&
                               "Our key clients include OOCL, COSCO, Pan Ocean Co. Ltd, Metro Logistics International (Pvt.) Ltd, and Shanghai Jin Jiang Shipping (Group) Co. Ltd."}
+                            {company.id === "zoom" &&
+                            "Serving world-wide, Zoom World Pvt Ltd offers seamless supply-chain coverage across global markets, acting as a trusted logistics partner for end-to-end freight solutions. With a strong customer-centric approach, operational excellence, and global network reach, Zoom World continues to strengthen its position in the international freight forwarding industry."}
                           </p>
                           <p className="text-gray-600 mb-6 leading-relaxed">
-                            {company.id === "baksh-investment" &&
-                              "Over the years, the company has evolved into a leading service provider in Pakistan’s maritime sector, offering a comprehensive range of port and vessel management services. With a legacy spanning over five decades, Baksh Investment Ltd remains committed to operational excellence, client satisfaction, and continuous innovation in Pakistan’s maritime and logistics industry."}
+                            {company.id === "baksh-shipping" &&
+                              "Over the years, the company has evolved into a leading service provider in Pakistan’s maritime sector, offering a comprehensive range of port and vessel management services. With a legacy spanning over five decades, Baksh Shipping Lines remains committed to operational excellence, client satisfaction, and continuous innovation in Pakistan’s maritime and logistics industry."}
                           </p>
                         </div>
                         <div className="bg-gray-100 rounded-lg overflow-hidden h-96 md:h-full">
@@ -758,7 +791,10 @@ established in Karachi and Lahore Port, serving key clients.
                                 ? "/images/yap.jpg"
                                 : company.id === "uosl"
                                 ? "/images/uosl.jpg"
+                                : company.id === "zoom"
+                                ? "/images/zoom.jpg"
                                 : "/images/bill.jpg"
+                                
                             }
                             alt={`${company.name} Operations`}
                             className="w-full h-full object-cover"

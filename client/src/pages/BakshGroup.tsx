@@ -36,7 +36,7 @@ const BakshGroup: React.FC = () => {
 
   const groupCompanies = [
     {
-      name: "Baksh Investment Limited",
+      name: "Baksh Shipping Lines",
       description: "The flagship company of Baksh Group, specializing in shipping agency services and maritime solutions with a legacy of excellence.",
       icon: Briefcase,
       year: "1967",
@@ -75,7 +75,7 @@ const BakshGroup: React.FC = () => {
     {
       year: '1967',
       title: 'Formal Incorporation',
-      event: 'Baksh Investment Limited was incorporated',
+      event: 'Baksh Shipping Lines was incorporated',
       icon: Building2
     },
     {

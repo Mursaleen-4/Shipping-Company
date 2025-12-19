@@ -151,7 +151,7 @@ const Navigation: React.FC = () => {
                     />
                     <DropdownLink
                       to="/about#baksh-investment"
-                      title="Baksh Investment Limited"
+                      title="Baksh Shipping Lines"
                       // desc="Financial Services"
                       // img="/images/bakhs_limited.jpg"
                     />
@@ -172,6 +172,10 @@ const Navigation: React.FC = () => {
                       title="UOSL Shipping & Logistics (Pvt) Ltd"
                       // // desc="End-to-end logistics"
                       // img="/images/uosl_logo.jpg"
+                    />
+                    <DropdownLink
+                      to="/about#zoom"
+                      title="Zoom World Pvt Ltd"
                     />
                   </motion.div>
                 )}
@@ -425,8 +429,8 @@ const Navigation: React.FC = () => {
                   >
                     <MobileLink to="/about#overview" label="Baksh Group" />
                     <MobileLink
-                      to="/about#baksh-investment"
-                      label="Baksh Investment Limited"
+                      to="/about#baksh-investment`"
+                      label="Baksh Shipping Lines"
                     />
                     <MobileLink
                       to="/about#yaaseen-shipping"
@@ -439,6 +443,10 @@ const Navigation: React.FC = () => {
                     <MobileLink
                       to="/about#uosl"
                       label="UOSL Shipping & Logistics (Pvt) Ltd"
+                    />
+                    <MobileLink
+                      to="/about#zoom"
+                      label="Zoom World Pvt Ltd"
                     />
                   </motion.div>
                 )}
