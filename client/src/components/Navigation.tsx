@@ -23,6 +23,7 @@ const Navigation: React.FC = () => {
   const [isTerminalsOpen, setIsTerminalsOpen] = useState(false);
   const pakistanRef = useRef<HTMLDivElement>(null);
   const terminalsRef = useRef<HTMLDivElement>(null);
+  const [trackingUrl, setTrackingUrl] = useState<string>("");
   const location = useLocation();
 
   // Close dropdown when clicking outside
@@ -86,6 +87,22 @@ const Navigation: React.FC = () => {
       setIsTerminalsOpen(false);
     }, HOVER_CLOSE_DELAY);
   };
+  // Fetch tracking URL
+  useEffect(() => {
+    const fetchTrackingUrl = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_BASE || 'http://localhost:5000'}/api/config/tracking-url`);
+        const result = await response.json();
+        if (result.success && result.data.trackingUrl) {
+          setTrackingUrl(result.data.trackingUrl);
+        }
+      } catch (error) {
+        console.error("Error fetching tracking URL:", error);
+      }
+    };
+    fetchTrackingUrl();
+  }, []);
+
   // Close menu when route changes
   useEffect(() => {
     setIsOpen(false);
@@ -129,9 +146,8 @@ const Navigation: React.FC = () => {
               <button className="px-3 py-2 text-sm text-gray-700 hover:text-blue-600 flex items-center">
                 GROUP OF COMPANIES
                 <ChevronDown
-                  className={`ml-1 h-4 w-4 transition-transform ${
-                    isCompaniesOpen ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 h-4 w-4 transition-transform ${isCompaniesOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -146,32 +162,32 @@ const Navigation: React.FC = () => {
                     <DropdownLink
                       to="/about#overview"
                       title="Baksh Group"
-                      // desc="Financial Services"
-                      // img="/images/Bakhs_group.jpg"
+                    // desc="Financial Services"
+                    // img="/images/Bakhs_group.jpg"
                     />
                     <DropdownLink
                       to="/about#baksh-investment"
                       title="Baksh Shipping Lines"
-                      // desc="Financial Services"
-                      // img="/images/bakhs_limited.jpg"
+                    // desc="Financial Services"
+                    // img="/images/bakhs_limited.jpg"
                     />
                     <DropdownLink
                       to="/about#yaaseen-shipping"
                       title="Yaaseen Shipping Lines"
-                      // desc="Global Shipping"
-                      // img="/images/yaseen_logo.png"
+                    // desc="Global Shipping"
+                    // img="/images/yaseen_logo.png"
                     />
                     <DropdownLink
                       to="/about#yaaseen-pvt"
                       title="Yaaseen Shipping Lines (Pvt) Ltd"
-                      // desc="Global Shipping"
-                      // img="/images/yaseen_logo.png"
+                    // desc="Global Shipping"
+                    // img="/images/yaseen_logo.png"
                     />
                     <DropdownLink
                       to="/about#uosl"
                       title="UOSL Shipping & Logistics (Pvt) Ltd"
-                      // // desc="End-to-end logistics"
-                      // img="/images/uosl_logo.jpg"
+                    // // desc="End-to-end logistics"
+                    // img="/images/uosl_logo.jpg"
                     />
                     <DropdownLink
                       to="/about#zoom"
@@ -198,9 +214,8 @@ const Navigation: React.FC = () => {
               >
                 SERVICES
                 <ChevronDown
-                  className={`ml-1 h-4 w-4 transition-transform ${
-                    isServicesOpen ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 h-4 w-4 transition-transform ${isServicesOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -241,9 +256,8 @@ const Navigation: React.FC = () => {
               <button className="px-3 py-2 text-sm text-gray-700 hover:text-blue-600 flex items-center">
                 MEDIA
                 <ChevronDown
-                  className={`ml-1 h-4 w-4 transition-transform ${
-                    isMediaOpen ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 h-4 w-4 transition-transform ${isMediaOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -284,9 +298,8 @@ const Navigation: React.FC = () => {
               >
                 PAKISTAN INSIGHTS
                 <ChevronDown
-                  className={`ml-1 h-4 w-4 transition-transform ${
-                    isPakistanOpen ? "rotate-180" : ""
-                  }`}
+                  className={`ml-1 h-4 w-4 transition-transform ${isPakistanOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -304,6 +317,16 @@ const Navigation: React.FC = () => {
                       to="/pakistan-insights"
                       label="Overview"
                     />
+                    {trackingUrl && (
+                      <a
+                        href={trackingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50"
+                      >
+                        Shipment Tracking
+                      </a>
+                    )}
                     <div className="border-t border-gray-100" />
                     <div className="relative" ref={terminalsRef}>
                       <button
@@ -321,9 +344,8 @@ const Navigation: React.FC = () => {
                       >
                         <span className="text-sm text-gray-700">Terminals</span>
                         <ChevronDown
-                          className={`h-4 w-4 text-gray-500 ${
-                            isTerminalsOpen ? "rotate-180" : ""
-                          }`}
+                          className={`h-4 w-4 text-gray-500 ${isTerminalsOpen ? "rotate-180" : ""
+                            }`}
                         />
                       </button>
                       <AnimatePresence>
@@ -413,9 +435,8 @@ const Navigation: React.FC = () => {
               >
                 GROUP OF COMPANIES
                 <ChevronDown
-                  className={`h-5 w-5 transition ${
-                    isCompaniesOpen ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 transition ${isCompaniesOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -459,9 +480,8 @@ const Navigation: React.FC = () => {
               >
                 SERVICES
                 <ChevronDown
-                  className={`h-5 w-5 transition ${
-                    isServicesOpen ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 transition ${isServicesOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -497,9 +517,8 @@ const Navigation: React.FC = () => {
               >
                 MEDIA
                 <ChevronDown
-                  className={`h-5 w-5 transition ${
-                    isMediaOpen ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 transition ${isMediaOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -525,9 +544,8 @@ const Navigation: React.FC = () => {
               >
                 PAKISTAN INSIGHTS
                 <ChevronDown
-                  className={`h-5 w-5 transition ${
-                    isPakistanOpen ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 transition ${isPakistanOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
               <AnimatePresence>
@@ -543,15 +561,24 @@ const Navigation: React.FC = () => {
                       to="/pakistan-insights/our-pakistan"
                       label="Overview"
                     />
+                    {trackingUrl && (
+                      <a
+                        href={trackingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center px-4 py-3 text-base text-gray-700 hover:bg-blue-50 rounded-lg"
+                      >
+                        Shipment Tracking
+                      </a>
+                    )}
                     <button
                       onClick={() => setIsTerminalsOpen(!isTerminalsOpen)}
                       className="flex justify-between items-center w-full px-4 py-2 text-left text-gray-700 hover:bg-blue-50 rounded-lg"
                     >
                       Terminals
                       <ChevronDown
-                        className={`h-4 w-4 transition ${
-                          isTerminalsOpen ? "rotate-180" : ""
-                        }`}
+                        className={`h-4 w-4 transition ${isTerminalsOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
                     <AnimatePresence>
@@ -630,13 +657,13 @@ const DropdownLink = ({
   to,
   title,
 }: // desc,
-// img,
-{
-  to: string;
-  title: string;
-  // desc: string;
-  // img: string;
-}) => (
+  // img,
+  {
+    to: string;
+    title: string;
+    // desc: string;
+    // img: string;
+  }) => (
   <Link
     to={to}
     className="flex items-center px-4 py-3 hover:bg-blue-50 transition"

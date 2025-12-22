@@ -17,6 +17,7 @@ import tariffRoutes from "./routes/tariffs";
 import tariffPageRoutes from "./routes/tariffPage";
 import exchangeRatesRoutes from "./routes/exchangeRates";
 import contactRoutes from "./routes/contact";
+import configRoutes from "./routes/config";
 // import scheduleRoutes from "./routes/schedules";
 import User from "./models/User";
 import seedAdmin from "./utils/seedAdmin";
@@ -85,6 +86,7 @@ app.use("/api/tariffs", tariffRoutes);
 app.use("/api/tariffPage", tariffPageRoutes);
 app.use("/api/exchange-rates", exchangeRatesRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/config", configRoutes);
 // app.use("/api/schedules", scheduleRoutes);
 
 app.get("/api/health", (req, res) => {
