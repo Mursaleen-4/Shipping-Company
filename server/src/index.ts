@@ -57,7 +57,7 @@ app.use(helmet({
 
 app.use(
   cors({
-    origin: true, // allow all origins temporarily for debugging
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
   })
 );
