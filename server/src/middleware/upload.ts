@@ -1,24 +1,10 @@
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
 import { Request } from 'express';
 
-// Ensure uploads directory exists in project root
-const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
-if (!fs.existsSync(UPLOAD_DIR)) {
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-}
+// Local uploads directory logic removed (now using Cloudinary)
 
-// Configure storage
-const storage = multer.diskStorage({
-  destination: (req: Request, file: Express.Multer.File, cb) => {
-    cb(null, UPLOAD_DIR);
-  },
-  filename: (req: Request, file: Express.Multer.File, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// Configure storage to use memory instead of disk
+const storage = multer.memoryStorage();
 
 // File filter function
 const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
@@ -44,7 +30,7 @@ const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilt
 const upload = multer({
   storage,
   limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760'), // 10MB
+    fileSize: parseInt(process.env.MAX_FILE_SIZE || '20971520'), // Increased to 20MB for cloud
   },
   fileFilter: fileFilter
 });

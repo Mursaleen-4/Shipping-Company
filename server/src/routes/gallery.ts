@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
 import { protect, authorize } from "../middleware/auth";
 import { uploadSingle, handleUploadError } from "../middleware/upload";
+import { uploadToCloudinary, deleteFromCloudinary, getPublicIdFromUrl } from "../utils/cloudinary";
+import logger from "../utils/logger";
 import Gallery from "../models/Gallery"; // ✅ fix: import the *model*, not the interface
 import { AuthRequest } from "../types";
 
@@ -112,12 +114,9 @@ router.post(
           .json({ success: false, error: "Not authorized" });
       }
 
-      // Return an absolute URL so clients do not need to guess origin
-      const host = req.get("host");
-      const proto = req.protocol;
-      const imageUrl = host
-        ? `${proto}://${host}/uploads/${req.file.filename}`
-        : `/uploads/${req.file.filename}`;
+      // Upload to Cloudinary
+      const result = await uploadToCloudinary(req.file.buffer, "gallery");
+      const imageUrl = result.secure_url;
 
       const gallery = await Gallery.create({
         title,
@@ -159,11 +158,16 @@ router.put(
       const updateData: any = { title, description, category };
 
       if (req.file) {
-        const host = req.get("host");
-        const proto = req.protocol;
-        updateData.imageUrl = host
-          ? `${proto}://${host}/uploads/${req.file.filename}`
-          : `/uploads/${req.file.filename}`;
+        // Upload new image to Cloudinary
+        const result = await uploadToCloudinary(req.file.buffer, "gallery");
+        updateData.imageUrl = result.secure_url;
+
+        // Optional: Delete old image from Cloudinary if it exists
+        const oldGallery = await Gallery.findById(req.params.id);
+        if (oldGallery?.imageUrl && oldGallery.imageUrl.includes("cloudinary")) {
+          const publicId = getPublicIdFromUrl(oldGallery.imageUrl);
+          if (publicId) await deleteFromCloudinary(publicId);
+        }
       }
 
       // Ensure we have an authenticated user
@@ -191,9 +195,10 @@ router.put(
         data: gallery,
       });
     } catch (error: any) {
+      logger.error(`PUT /api/gallery/:id error: ${error.message}`);
       return res.status(500).json({
         success: false,
-        error: error.message || "Server error",
+        error: "Server error",
       });
     }
   }
@@ -215,6 +220,12 @@ router.delete(
           success: false,
           error: "Gallery image not found",
         });
+      }
+
+      // Delete from Cloudinary if it's a cloudinary URL
+      if (gallery.imageUrl && gallery.imageUrl.includes("cloudinary")) {
+        const publicId = getPublicIdFromUrl(gallery.imageUrl);
+        if (publicId) await deleteFromCloudinary(publicId);
       }
 
       await gallery.deleteOne();

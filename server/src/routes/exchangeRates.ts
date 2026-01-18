@@ -2,6 +2,7 @@ import express from "express";
 import { Request, Response } from "express";
 import { protect, authorize } from "../middleware/auth";
 import ExchangeRate from "../models/ExchangeRate";
+import logger from "../utils/logger";
 import TariffPage from "../models/TariffPage";
 
 const router = express.Router();
@@ -29,11 +30,12 @@ router.get(
           .json({ success: false, error: "No exchange rate found for date" });
       }
       return res.status(200).json({ success: true, data: doc });
-    } catch (err: any) {
-      console.error("Get exchange rate by date error:", err);
-      return res
-        .status(500)
-        .json({ success: false, error: "Error fetching exchange rate" });
+    } catch (error: any) {
+      logger.error(`ExchangeRate error: ${error.message}`);
+      return res.status(500).json({
+        success: false,
+        error: "Server error",
+      });
     }
   }
 );
@@ -71,11 +73,12 @@ router.get(
 
       const list = await ExchangeRate.find(query).sort({ date: 1 }).lean();
       return res.status(200).json({ success: true, data: list });
-    } catch (err: any) {
-      console.error("List exchange rates error:", err);
-      return res
-        .status(500)
-        .json({ success: false, error: "Error listing exchange rates" });
+    } catch (error: any) {
+      logger.error(`ExchangeRate error: ${error.message}`);
+      return res.status(500).json({
+        success: false,
+        error: "Server error",
+      });
     }
   }
 );

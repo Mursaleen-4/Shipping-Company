@@ -1,15 +1,20 @@
 import express from "express";
-
 import path from "path";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+
+// Load env as early as possible
+dotenv.config();
+
 import { errorHandler } from "./middleware/errorHandler";
 import { notFound } from "./middleware/notFound";
+import logger from "./utils/logger";
+import morgan from "morgan";
 
-// Import routes
+// Routes
 import authRoutes from "./routes/auth";
 import galleryRoutes from "./routes/gallery";
 import blogRoutes from "./routes/blogs";
@@ -21,64 +26,63 @@ import contactRoutes from "./routes/contact";
 import configRoutes from "./routes/config";
 import scheduleFileRoutes from "./routes/scheduleFile";
 import downloadDocsRoutes from "./routes/downloadDocs";
-// import scheduleRoutes from "./routes/schedules";
-import User from "./models/User";
+
 import seedAdmin from "./utils/seedAdmin";
 
-// Load environment variables
-dotenv.config();
-
-// Initialize Express app
+// Create app
 const app = express();
 
-/* ------------------------- DATABASE CONNECTION ------------------------- */
+/* ------------------------- DATABASE ------------------------- */
 const connectDB = async () => {
-  try {
-    if (!process.env.MONGO_URI) {
-      throw new Error("MONGO_URI is not defined in environment variables");
-    }
-
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
-      maxPoolSize: 10,
-      connectTimeoutMS: 30000,
-      serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 45000,
-      retryWrites: true,
-    });
-
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    process.exit(1);
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI not defined");
   }
+
+  await mongoose.connect(process.env.MONGO_URI, {
+    maxPoolSize: 10,
+    connectTimeoutMS: 30000,
+    serverSelectionTimeoutMS: 30000,
+    socketTimeoutMS: 45000,
+    retryWrites: true,
+  });
+
+  logger.info("✅ MongoDB connected");
 };
 
 /* ------------------------- MIDDLEWARE ------------------------- */
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false, // temporarily disable for debugging assets
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: true, // allow all origins temporarily for debugging
     credentials: true,
   })
 );
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-});
-app.use(limiter);
-
-// Serve uploaded files
+// HTTP request logging
 app.use(
-  "/uploads",
-  express.static(path.join(process.cwd(), "uploads"), {
-    setHeaders: (res) => {
-      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  morgan(":method :url :status :res[content-length] - :response-time ms", {
+    stream: {
+      write: (message) => logger.http(message.trim()),
     },
   })
 );
+
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+  })
+);
+
+// Serve static assets if needed, but not local uploads anymore
+// app.use("/uploads", ...) removed in favor of Cloudinary
 
 /* ------------------------- ROUTES ------------------------- */
 app.use("/api/auth", authRoutes);
@@ -92,44 +96,65 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/config", configRoutes);
 app.use("/api/schedule-file", scheduleFileRoutes);
 app.use("/api/download-docs", downloadDocsRoutes);
-// app.use("/api/schedules", scheduleRoutes);
 
-app.get("/api/health", (req, res) => {
-  res.status(200).json({ status: "ok", timestamp: new Date() });
+app.get("/api/health", (_req, res) => {
+  res.status(200).json({ status: "ok", time: new Date() });
+});
+
+/* ------------------------- FRONTEND SERVING ------------------------- */
+// More robust path resolution for cPanel/Production
+const possiblePaths = [
+  path.join(__dirname, "..", "..", "client", "dist"),
+  path.join(process.cwd(), "..", "client", "dist"),
+  path.join(process.cwd(), "public"),
+];
+
+let clientBuildPath = possiblePaths[0];
+
+// Simple check to find which path actually contains index.html
+import fs from "fs";
+for (const p of possiblePaths) {
+  if (fs.existsSync(path.join(p, "index.html"))) {
+    clientBuildPath = p;
+    logger.info(`📍 Found frontend build at: ${clientBuildPath}`);
+    break;
+  }
+}
+
+app.use(express.static(clientBuildPath));
+
+// Catch-all route to serve the React index.html
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) {
+    return next();
+  }
+
+  const indexPath = path.join(clientBuildPath, "index.html");
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    logger.warn(`⚠️ index.html not found at ${indexPath}`);
+    next();
+  }
 });
 
 app.use(notFound);
 app.use(errorHandler);
 
-/* ------------------------- START SERVER ------------------------- */
+/* ------------------------- INIT ------------------------- */
 const PORT = process.env.PORT || 5000;
-let server: ReturnType<typeof import("http").createServer> | null = null;
 
-const startServer = async () => {
-  try {
-    await connectDB();
-
-    // seed initial data
+connectDB()
+  .then(async () => {
     await seedAdmin();
-
-    server = app.listen(PORT, () => {
-      console.log(
-        `🚀 Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-      );
+    app.listen(PORT, () => {
+      logger.info(`🚀 Server running on http://localhost:${PORT}`);
     });
-  } catch (error) {
-    console.error("❌ Failed to start server:", error);
+  })
+  .catch((err) => {
+    logger.error(`❌ Startup error: ${err}`);
     process.exit(1);
-  }
-};
+  });
 
-startServer();
+export default app;
 
-process.on("unhandledRejection", (err: Error) => {
-  console.error("Unhandled Rejection:", err.message);
-  if (server) {
-    server.close(() => process.exit(1));
-  } else {
-    process.exit(1);
-  }
-});

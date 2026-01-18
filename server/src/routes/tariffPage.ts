@@ -1,6 +1,7 @@
 import express from "express";
 import { Response, Request } from "express";
 import { protect, authorize } from "../middleware/auth";
+import logger from "../utils/logger";
 import TariffPage from "../models/TariffPage";
 import ExchangeRate from "../models/ExchangeRate"; // historical effective-dated rate records
 
@@ -18,7 +19,7 @@ router.get("/", async (req: Request, res: Response) => {
     }
     return res.status(200).json({ success: true, data: doc });
   } catch (err: any) {
-    console.error("Get tariff page error:", err);
+    logger.error(`Get tariff page error: ${err.message}`);
     return res
       .status(500)
       .json({ success: false, error: "Error fetching tariff page" });
@@ -69,7 +70,7 @@ router.put(
       }
       return res.status(200).json({ success: true, data: updated });
     } catch (err: any) {
-      console.error("Update tariff page error:", err);
+      logger.error(`Update tariff page error: ${err.message}`);
       return res
         .status(500)
         .json({ success: false, error: "Error updating tariff page" });
@@ -157,7 +158,7 @@ router.patch(
       }
       return res.status(200).json({ success: true, data: updated });
     } catch (err: any) {
-      console.error("Unified exchange patch error:", err);
+      logger.error(`Unified exchange patch error: ${err.message}`);
       return res.status(500).json({
         success: false,
         error: "Error updating exchange data",

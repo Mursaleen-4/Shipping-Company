@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { protect, authorize } from "../middleware/auth";
 import { uploadSingle, handleUploadError } from "../middleware/upload";
+import { uploadToCloudinary, deleteFromCloudinary, getPublicIdFromUrl } from "../utils/cloudinary";
 import IBlog from "../models/Blog";
 import { AuthRequest } from "../types";
 
@@ -115,11 +116,15 @@ router.post(
         }
       }
 
+      // Upload to Cloudinary
+      const result = await uploadToCloudinary(req.file.buffer, "blogs");
+      const imageUrl = result.secure_url;
+
       const blog = await IBlog.create({
         title,
         excerpt,
         content: content && content.trim().length > 0 ? content : excerpt,
-        imageUrl: `/uploads/${req.file.filename}`,
+        imageUrl,
         externalLink: externalLink || undefined,
         category: (category as any) || "company",
         author,
@@ -185,7 +190,16 @@ router.put(
         updateData.featured = featured === "true" || featured === true;
 
       if (req.file) {
-        updateData.imageUrl = `/uploads/${req.file.filename}`;
+        // Upload new image to Cloudinary
+        const result = await uploadToCloudinary(req.file.buffer, "blogs");
+        updateData.imageUrl = result.secure_url;
+
+        // Optional: Delete old image from Cloudinary
+        const oldBlog = await IBlog.findById(req.params.id);
+        if (oldBlog?.imageUrl && oldBlog.imageUrl.includes("cloudinary")) {
+          const publicId = getPublicIdFromUrl(oldBlog.imageUrl);
+          if (publicId) await deleteFromCloudinary(publicId);
+        }
       }
 
       if (tags) {
@@ -239,6 +253,12 @@ router.delete(
           success: false,
           error: "Blog post not found",
         });
+      }
+
+      // Delete from Cloudinary if it's a cloudinary URL
+      if (blog.imageUrl && blog.imageUrl.includes("cloudinary")) {
+        const publicId = getPublicIdFromUrl(blog.imageUrl);
+        if (publicId) await deleteFromCloudinary(publicId);
       }
 
       await blog.deleteOne();

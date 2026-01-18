@@ -26,8 +26,7 @@ client/.nuxt/
 server/node_modules/
 server/dist/
 server/build/
-server/uploads/*
-!server/uploads/.gitkeep
+# server/uploads/* removed (using Cloudinary)
 
 ###############################
 # Environment Files

@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import logger from "../utils/logger";
 
 export interface AppError extends Error {
   statusCode?: number;
@@ -6,7 +7,7 @@ export interface AppError extends Error {
 }
 
 export const errorHandler = (
-  err: AppError,
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction
@@ -15,7 +16,18 @@ export const errorHandler = (
   error.message = err.message;
 
   // Log error
-  console.error('Error:', err);
+  logger.error(err.stack || err.message);
+
+  // Also log to a file for debugging
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const logPath = path.join(process.cwd(), 'error.log');
+    const logMessage = `[${new Date().toISOString()}] ${req.method} ${req.url}\nError: ${err.message}\nStack: ${err.stack}\n\n`;
+    fs.appendFileSync(logPath, logMessage);
+  } catch (e) {
+    console.error('Failed to write to log file', e);
+  }
 
   // Mongoose bad ObjectId
   if (err.name === 'CastError') {

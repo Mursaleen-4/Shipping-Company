@@ -1,4 +1,5 @@
 import User from '../models/User';
+import logger from "./logger";
 
 export default async function seedAdmin(): Promise<void> {
   try {
@@ -6,7 +7,7 @@ export default async function seedAdmin(): Promise<void> {
     const adminPassword = process.env.ADMIN_PASSWORD;
 
     if (!adminEmail || !adminPassword) {
-      console.warn('seedAdmin: ADMIN_EMAIL or ADMIN_PASSWORD not set - skipping admin seeding');
+      logger.warn('seedAdmin: ADMIN_EMAIL or ADMIN_PASSWORD not set - skipping admin seeding');
       return;
     }
 
@@ -17,9 +18,9 @@ export default async function seedAdmin(): Promise<void> {
       if (existing.role !== 'admin') {
         existing.role = 'admin';
         await existing.save();
-        console.log(`seedAdmin: promoted existing user ${email} to admin`);
+        logger.info(`seedAdmin: promoted existing user ${email} to admin`);
       } else {
-        console.log(`seedAdmin: admin ${email} already exists`);
+        logger.info(`seedAdmin: admin ${email} already exists`);
       }
       return;
     }
@@ -30,8 +31,8 @@ export default async function seedAdmin(): Promise<void> {
       role: 'admin'
     });
 
-    console.log(`seedAdmin: created admin ${user.email}`);
-  } catch (err) {
-    console.error('seedAdmin error:', err);
+    logger.info(`seedAdmin: created admin ${user.email}`);
+  } catch (error) {
+    logger.error(`seedAdmin error: ${error}`);
   }
 }

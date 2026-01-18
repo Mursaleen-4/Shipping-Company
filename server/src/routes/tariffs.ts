@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { protect, authorize } from '../middleware/auth';
 import { uploadPdf, handleUploadError } from '../middleware/upload';
+import { uploadToCloudinary, deleteFromCloudinary, getPublicIdFromUrl } from '../utils/cloudinary';
 import Tariff from '../models/TariffPage';
 import { AuthRequest } from '../types';
 
@@ -86,11 +87,15 @@ router.post(
         });
       }
 
-      const tariff = await Tariff.create({
+      // Upload to Cloudinary
+      const result = await uploadToCloudinary(req.file.buffer, "tariffs", "raw");
+      const fileUrl = result.secure_url;
+
+      const tariff = await (Tariff as any).create({
         title,
         description,
         category,
-        fileUrl: `/uploads/${req.file.filename}`,
+        fileUrl,
         uploadedBy: req.user!._id,
       });
 
@@ -124,10 +129,19 @@ router.put(
       const updateData: any = { title, description, category };
 
       if (req.file) {
-        updateData.fileUrl = `/uploads/${req.file.filename}`;
+        // Upload to Cloudinary
+        const result = await uploadToCloudinary(req.file.buffer, "tariffs", "raw");
+        updateData.fileUrl = result.secure_url;
+
+        // Optional: Delete old file
+        const oldTariff = await (Tariff as any).findById(req.params.id);
+        if (oldTariff?.fileUrl && oldTariff.fileUrl.includes("cloudinary")) {
+          const publicId = getPublicIdFromUrl(oldTariff.fileUrl);
+          if (publicId) await deleteFromCloudinary(publicId, "raw");
+        }
       }
 
-      const tariff = await Tariff.findByIdAndUpdate(req.params.id, updateData, {
+      const tariff = await (Tariff as any).findByIdAndUpdate(req.params.id, updateData, {
         new: true,
         runValidators: true,
       }).populate('uploadedBy', 'email');
@@ -157,13 +171,19 @@ router.put(
 // @access  Private (Admin only)
 router.delete('/:id', protect, authorize('admin'), async (req: AuthRequest, res: Response) => {
   try {
-    const tariff = await Tariff.findById(req.params.id);
+    const tariff = await (Tariff as any).findById(req.params.id);
 
     if (!tariff) {
       return res.status(404).json({
         success: false,
         error: 'Tariff not found',
       });
+    }
+
+    // Delete from Cloudinary
+    if (tariff.fileUrl && tariff.fileUrl.includes("cloudinary")) {
+      const publicId = getPublicIdFromUrl(tariff.fileUrl);
+      if (publicId) await deleteFromCloudinary(publicId, "raw");
     }
 
     await tariff.deleteOne();

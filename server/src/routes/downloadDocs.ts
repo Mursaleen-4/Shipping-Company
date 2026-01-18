@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express";
 import { protect, authorize } from "../middleware/auth";
 import { uploadDoc, handleUploadError } from "../middleware/upload";
+import { uploadToCloudinary, deleteFromCloudinary, getPublicIdFromUrl } from "../utils/cloudinary";
 import DownloadDoc from "../models/DownloadDoc";
-import fs from "fs";
-import path from "path";
 
 const router = express.Router();
 
@@ -35,7 +34,9 @@ router.post(
                 return res.status(400).json({ success: false, message: "Please upload a file" });
             }
 
-            const fileUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+            // Upload to Cloudinary
+            const result = await uploadToCloudinary(req.file.buffer, "download-docs", "raw");
+            const fileUrl = result.secure_url;
 
             const doc = await DownloadDoc.create({
                 title,
@@ -65,13 +66,10 @@ router.delete("/:id", protect, authorize("admin"), async (req: Request, res: Res
             return res.status(404).json({ success: false, message: "Document not found" });
         }
 
-        // Delete file from filesystem
-        const fileName = doc.fileUrl.split("/").pop();
-        if (fileName) {
-            const filePath = path.join(process.cwd(), "uploads", fileName);
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-            }
+        // Delete from Cloudinary
+        if (doc.fileUrl && doc.fileUrl.includes("cloudinary")) {
+            const publicId = getPublicIdFromUrl(doc.fileUrl);
+            if (publicId) await deleteFromCloudinary(publicId, "raw");
         }
 
         await doc.deleteOne();

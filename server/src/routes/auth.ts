@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { protect } from '../middleware/auth';
 import { generateToken } from '../utils/jwt';
 import User from '../models/User';
+import logger from '../utils/logger';
 import { AuthRequest } from '../types';
 
 const router = express.Router();
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Login error:', error);
+    logger.error('Login error:', error);
     return res.status(500).json({
       success: false,
       error: 'Server error during login'
