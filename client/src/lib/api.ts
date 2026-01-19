@@ -1,6 +1,21 @@
+import axios from "axios";
+
 // Resolve API base URL. In development, Vite proxys /api to the backend.
-// In production, the app usually calls the same origin or a relative path.
-export const API_BASE = "";
+// In production, use the Render backend URL.
+export const API_BASE = import.meta.env.PROD
+  ? "https://shipping-comp.onrender.com"
+  : "";
+
+// Create axios instance with proper base URL
+export const api = axios.create({
+  baseURL: API_BASE ? `${API_BASE}/api` : "/api",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});
+
+export default api;
 
 /**
  * Resolve the image/file URL.

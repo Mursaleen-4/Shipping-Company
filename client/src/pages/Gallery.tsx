@@ -11,7 +11,7 @@ import {
   Trash,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
-import axios from "axios";
+import api from "../lib/api";
 import toast from "react-hot-toast";
 import { getImageUrl } from "../lib/api";
 // import { pageBackgrounds } from '../assets/videos';
@@ -61,7 +61,7 @@ const Gallery: React.FC = () => {
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const res = await axios.get("/categories?type=gallery");
+        const res = await api.get("/categories?type=gallery");
         const data = res.data?.data || [];
         const mapped = data.map((c: any) => ({ id: c.slug, name: c.name }));
         setCategories((prev) => [
@@ -91,7 +91,7 @@ const Gallery: React.FC = () => {
     // caller must set showConfirmModal(true) before invoking this
 
     try {
-      await Promise.all(ids.map((id) => axios.delete(`/gallery/${id}`)));
+      await Promise.all(ids.map((id) => api.delete(`/gallery/${id}`)));
       toast.success("Selected images deleted");
       setDeleteMode(false);
       clearSelection();
@@ -109,7 +109,7 @@ const Gallery: React.FC = () => {
 
   const fetchImages = async () => {
     try {
-      const response = await axios.get("/gallery");
+      const response = await api.get("/gallery");
       // Only use API images (server now returns absolute URLs)
       setImages(response.data.data || []);
     } catch (error) {
@@ -143,7 +143,7 @@ const Gallery: React.FC = () => {
       formData.append("category", uploadForm.category);
       formData.append("image", uploadForm.image);
 
-      await axios.post("/gallery", formData);
+      await api.post("/gallery", formData);
 
       toast.success("Image uploaded successfully!");
       setShowUploadModal(false);
@@ -401,7 +401,7 @@ const Gallery: React.FC = () => {
                         return;
                       }
                       try {
-                        const res = await axios.post("/categories", {
+                        const res = await api.post("/categories", {
                           name: newCategoryName.trim(),
                           type: "gallery",
                         });
@@ -477,7 +477,7 @@ const Gallery: React.FC = () => {
                         return;
                       }
                       try {
-                        await axios.delete(`/categories/${categorySlug}`);
+                        await api.delete(`/categories/${categorySlug}`);
                         setCategories((prev) =>
                           prev.filter((c) => c.id !== categorySlug)
                         );

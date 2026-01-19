@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import toast from "react-hot-toast";
 import { getEffectiveRate } from "../lib/exchangeRates";
-import axios from "axios";
+import api from "../lib/api";
 
 const AdminDashboard: React.FC = () => {
   const { user, logout } = useAuth();
@@ -212,7 +212,7 @@ const ExchangeRateWidget: React.FC = () => {
     let mounted = true;
     (async () => {
       try {
-        const res = await axios.get("/tariffPage");
+        const res = await api.get("/tariffPage");
         if (mounted && res.data?.success && res.data.data) {
           setAllowUsers(Boolean(res.data.data.allowUserHistoricalRates));
         }
@@ -284,12 +284,13 @@ const ExchangeRateWidget: React.FC = () => {
                   setToggling(true);
                   try {
                     const next = !allowUsers;
-                    await axios.put("/tariffPage", {
+                    await api.put("/tariffPage", {
                       allowUserHistoricalRates: next,
                     });
                     setAllowUsers(next);
                     toast.success(
-                      `Historical rates for users ${next ? "enabled" : "disabled"
+                      `Historical rates for users ${
+                        next ? "enabled" : "disabled"
                       }`
                     );
                   } catch (e: any) {
@@ -303,10 +304,11 @@ const ExchangeRateWidget: React.FC = () => {
                   }
                 }}
                 disabled={toggling}
-                className={`px-3 py-1 rounded-lg font-medium ${allowUsers
+                className={`px-3 py-1 rounded-lg font-medium ${
+                  allowUsers
                     ? "bg-green-600 text-white"
                     : "bg-gray-200 text-gray-800"
-                  }`}
+                }`}
               >
                 {toggling ? "Saving…" : allowUsers ? "ON" : "OFF"}
               </button>

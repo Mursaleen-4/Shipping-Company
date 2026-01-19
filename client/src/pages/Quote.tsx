@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import api from "../lib/api";
+import { motion } from "framer-motion";
 import {
   Ship,
   MapPin,
@@ -11,36 +11,40 @@ import {
   Send,
   Calculator,
   Clock,
-  Globe
-} from 'lucide-react';
+  Globe,
+} from "lucide-react";
 // import { pageBackgrounds } from '../assets/videos';
 
 const Quote: React.FC = () => {
   const [formData, setFormData] = useState({
-    shipmentType: '',
-    origin: '',
-    destination: '',
-    cargoType: '',
-    weight: '',
-    volume: '',
-    containerType: '',
-    pickupDate: '',
-    deliveryDate: '',
-    specialRequirements: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    company: ''
+    shipmentType: "",
+    origin: "",
+    destination: "",
+    cargoType: "",
+    weight: "",
+    volume: "",
+    containerType: "",
+    pickupDate: "",
+    deliveryDate: "",
+    specialRequirements: "",
+    contactName: "",
+    email: "",
+    phone: "",
+    company: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -49,43 +53,22 @@ const Quote: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Get API Key from server
-      const apiUrl = import.meta.env.VITE_API_BASE || import.meta.env.VITE_API_URL?.replace(/\/api$/, '') || 'http://localhost:5000';
-      const configResponse = await axios.get(`${apiUrl}/api/contact/config`);
-      const apiKey = configResponse.data.apiKey;
-
-      if (!apiKey) {
-        throw new Error('Could not retrieve API key from server');
-      }
-
-      // 2. Submit directly to Web3Forms
-      const response = await axios.post("https://api.web3forms.com/submit", {
-        access_key: apiKey,
+      // Submit to backend contact endpoint
+      const response = await api.post("/contact", {
         ...formData,
         subject: `New Quote Request from ${formData.contactName}`,
-        message: `
-          Shipment Type: ${formData.shipmentType}
-          Cargo Type: ${formData.cargoType}
-          Origin: ${formData.origin}
-          Destination: ${formData.destination}
-          Weight: ${formData.weight}
-          Volume: ${formData.volume}
-          Container Type: ${formData.containerType}
-          Pickup Date: ${formData.pickupDate}
-          Delivery Date: ${formData.deliveryDate}
-          Special Requirements: ${formData.specialRequirements}
-          Company: ${formData.company}
-          Phone: ${formData.phone}
-          Email: ${formData.email}
-        `
       });
 
       if (response.status === 200) {
         setIsSubmitted(true);
       }
     } catch (error: any) {
-      console.error('Quote submission error:', error);
-      alert(`Error: ${error.response?.data?.message || error.message || 'Submission failed'}`);
+      console.error("Quote submission error:", error);
+      alert(
+        `Error: ${
+          error.response?.data?.message || error.message || "Submission failed"
+        }`
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -97,13 +80,17 @@ const Quote: React.FC = () => {
   // ];
 
   const cargoTypes = [
-    'General Cargo', 'Containerized', 'Break Bulk', 'Project Cargo',
-    'Hazardous Materials', 'Refrigerated', 'Oversized', 'Other'
+    "General Cargo",
+    "Containerized",
+    "Break Bulk",
+    "Project Cargo",
+    "Hazardous Materials",
+    "Refrigerated",
+    "Oversized",
+    "Other",
   ];
 
-  const shipmentTypes = [
-    'Import', 'Export', 'Transhipment'
-  ];
+  const shipmentTypes = ["Import", "Export", "Transhipment"];
 
   if (isSubmitted) {
     return (
@@ -122,7 +109,9 @@ const Quote: React.FC = () => {
               Quote Request Submitted!
             </h2>
             <p className="text-gray-600 mb-6">
-              Thank you for your interest in our services. Our team will review your request and get back to you within 24 hours with a detailed quote.
+              Thank you for your interest in our services. Our team will review
+              your request and get back to you within 24 hours with a detailed
+              quote.
             </p>
             <div className="space-y-3">
               <div className="flex items-center text-sm text-gray-600">
@@ -165,7 +154,9 @@ const Quote: React.FC = () => {
               Get a <span className="text-blue-700">Quote</span>
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-              Request a personalized quote for your shipping and logistics needs. Our experts will provide you with competitive rates and tailored solutions.
+              Request a personalized quote for your shipping and logistics
+              needs. Our experts will provide you with competitive rates and
+              tailored solutions.
             </p>
           </motion.div>
         </div>
@@ -173,7 +164,6 @@ const Quote: React.FC = () => {
 
       {/* Quote Form */}
       <section className="py-20 bg-transparent">
-
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="bg-white rounded-2xl shadow-xl overflow-hidden"
@@ -188,8 +178,13 @@ const Quote: React.FC = () => {
                   <Calculator className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white">Shipping Quote Request</h2>
-                  <p className="text-blue-100">Fill out the form below and we'll get back to you with a detailed quote</p>
+                  <h2 className="text-2xl font-bold text-white">
+                    Shipping Quote Request
+                  </h2>
+                  <p className="text-blue-100">
+                    Fill out the form below and we'll get back to you with a
+                    detailed quote
+                  </p>
                 </div>
               </div>
             </div>
@@ -214,8 +209,10 @@ const Quote: React.FC = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Select shipment type</option>
-                      {shipmentTypes.map(type => (
-                        <option key={type} value={type}>{type}</option>
+                      {shipmentTypes.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -231,8 +228,10 @@ const Quote: React.FC = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                       <option value="">Select cargo type</option>
-                      {cargoTypes.map(type => (
-                        <option key={type} value={type}>{type}</option>
+                      {cargoTypes.map((type) => (
+                        <option key={type} value={type}>
+                          {type}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -366,7 +365,7 @@ const Quote: React.FC = () => {
               {/* Special Requirements */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Details/Requirements
+                  Details/Requirements
                 </label>
                 <textarea
                   name="specialRequirements"

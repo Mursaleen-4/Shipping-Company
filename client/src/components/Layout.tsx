@@ -1,9 +1,10 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
-import Navigation from './Navigation';
-import WhatsAppButton from './WhatsAppButton';
-import Footer from './Footer'; // ✅ Make sure this import path is correct
+import React from "react";
+import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import Navigation from "./Navigation";
+import WhatsAppButton from "./WhatsAppButton";
+import Footer from "./Footer"; // ✅ Make sure this import path is correct
+import { API_BASE } from "../lib/api";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,13 +13,14 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const path = location.pathname;
-  const [whatsappNumber, setWhatsappNumber] = React.useState<string>("+92 333 3636403");
+  const [whatsappNumber, setWhatsappNumber] =
+    React.useState<string>("+92 333 3636403");
 
   // Fetch public config
   React.useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_BASE || 'http://localhost:5000'}/api/config/tracking-url`);
+        const response = await fetch(`${API_BASE}/api/config/tracking-url`);
         const result = await response.json();
         if (result.success && result.data.whatsappNumber) {
           setWhatsappNumber(result.data.whatsappNumber);
@@ -32,7 +34,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   // Don't show WhatsApp button on dashboard, login, or admin pages
   const showWhatsAppButton =
-    !path.includes('/dashboard') && !path.includes('/login') && !path.includes('/admin');
+    !path.includes("/dashboard") &&
+    !path.includes("/login") &&
+    !path.includes("/admin");
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">

@@ -11,7 +11,7 @@ import {
   X,
   Trash,
 } from "lucide-react";
-import axios from "axios";
+import api from "../lib/api";
 import toast from "react-hot-toast";
 import { useAuth } from "../contexts/AuthContext";
 import { getImageUrl } from "../lib/api";
@@ -56,7 +56,7 @@ const News: React.FC = () => {
   const fetchBlogs = async () => {
     try {
       setIsLoading(true);
-      const res = await axios.get("/blogs");
+      const res = await api.get("/blogs");
       const data: BlogPost[] = res.data?.data || [];
       // Ensure all posts have valid IDs
       const validatedData = data.map((post, idx) => ({
@@ -135,12 +135,12 @@ const News: React.FC = () => {
     // confirmation is handled by modal
 
     try {
-      await Promise.all(ids.map((id) => axios.delete(`/blogs/${id}`)));
+      await Promise.all(ids.map((id) => api.delete(`/blogs/${id}`)));
       toast.success("Selected articles deleted");
       setDeleteMode(false);
       clearSelection();
       // refresh
-      const res = await axios.get("/blogs");
+      const res = await api.get("/blogs");
       const refreshedData: BlogPost[] = res.data?.data || [];
       const validatedData = refreshedData.map((post, idx) => ({
         ...post,
@@ -171,7 +171,7 @@ const News: React.FC = () => {
   useEffect(() => {
     const loadCategories = async () => {
       try {
-        const res = await axios.get("/categories?type=blog");
+        const res = await api.get("/categories?type=blog");
         const data = res.data?.data || [];
         const mapped = data.map((c: any) => ({
           id: c.slug,
@@ -238,7 +238,7 @@ const News: React.FC = () => {
       fd.append("category", form.category || "company");
       fd.append("image", form.image!);
 
-      await axios.post("/blogs", fd);
+      await api.post("/blogs", fd);
       toast.success("News added successfully");
       setShowAddModal(false);
       // reset
@@ -255,7 +255,7 @@ const News: React.FC = () => {
         category: "company",
       });
       // refresh
-      const res = await axios.get("/blogs");
+      const res = await api.get("/blogs");
       const refreshedData: BlogPost[] = res.data?.data || [];
       const validatedData = refreshedData.map((post, idx) => ({
         ...post,
@@ -371,7 +371,7 @@ const News: React.FC = () => {
                       return;
                     }
                     try {
-                      const res = await axios.post("/categories", {
+                      const res = await api.post("/categories", {
                         name: newCategoryName.trim(),
                         type: "blog",
                       });
@@ -447,7 +447,7 @@ const News: React.FC = () => {
                       return;
                     }
                     try {
-                      await axios.delete(`/categories/${categorySlug}`);
+                      await api.delete(`/categories/${categorySlug}`);
                       setCategories((prev) =>
                         prev.filter((c) => c.id !== categorySlug)
                       );

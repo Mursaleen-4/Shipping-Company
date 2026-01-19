@@ -5,7 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import axios from "axios";
+import api from "../lib/api";
 
 interface User {
   id: string;
@@ -24,12 +24,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Configure axios defaults (use Vite env when available)
-axios.defaults.baseURL =
-  (import.meta.env.VITE_API_URL as string) || "http://localhost:5000/api";
-
 // Add request interceptor to include token
-axios.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -43,7 +39,7 @@ axios.interceptors.request.use(
 );
 
 // Add response interceptor to handle token expiration
-axios.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
@@ -86,11 +82,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post("/auth/login", { email, password });
+      const response = await api.post("/auth/login", { email, password });
 
       // Check if the response has the expected structure
       if (!response.data || !response.data.token || !response.data.data) {
-        throw new Error("Invalid response from server");
+        throw new Error("Invalpiesponse from server");
       }
 
       const newToken = response.data.token;

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "./api";
 
 // Abstraction layer so components don't import axios directly
 // Return typed results and normalize error handling.
@@ -17,7 +17,7 @@ export async function getEffectiveRate(
     throw new Error("Invalid date format. Use YYYY-MM-DD");
   }
   try {
-    const res = await axios.get(`/exchange-rates/effective/${date}`);
+    const res = await api.get(`/exchange-rates/effective/${date}`);
     return res.data?.data as EffectiveRate;
   } catch (e: any) {
     if (e?.response?.status === 404) return null;
@@ -35,7 +35,7 @@ export async function getEffectiveRatePublic(
     throw new Error("Invalid date format. Use YYYY-MM-DD");
   }
   try {
-    const res = await axios.get(`/exchange-rates/effective-public/${date}`);
+    const res = await api.get(`/exchange-rates/effective-public/${date}`);
     return res.data?.data as EffectiveRate;
   } catch (e: any) {
     if (e?.response?.status === 404) return null;
@@ -56,7 +56,7 @@ export async function saveRate(date: string, rate: number): Promise<void> {
     throw new Error("Rate must be a positive number");
   }
   try {
-    await axios.post(`/exchange-rates`, { date, rate });
+    await api.post(`/exchange-rates`, { date, rate });
   } catch (e: any) {
     throw new Error(e?.response?.data?.error || "Failed to save rate");
   }
